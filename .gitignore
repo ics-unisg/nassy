@@ -1,0 +1,25 @@
+.gradle
+.directory
+/build/
+/out/
+!gradle/wrapper/gradle-wrapper.jar
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+#data/.directory
+
+data/*
+
+
+TestForCheetah/logs/
+
+**/__pychache__/**
+
+**/setting.py
+
+
+**/*.properties
