@@ -1,0 +1,65 @@
+buildscript {
+	ext {
+		springBootVersion = '1.5.6.RELEASE'
+	}
+	repositories {
+		mavenCentral()
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'application'
+
+mainClassName = "com.dcap.DCAPMain"
+
+
+
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+	mavenCentral()
+}
+
+
+
+
+
+dependencies {
+	compile('org.springframework.boot:spring-boot-starter-data-jpa')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile("org.springframework.boot:spring-boot-starter-security")
+	compile group: 'org.apache.commons', name: 'commons-math3', version: '3.6.1'
+	// compile group: 'com.google.collections', name: 'google-collections', version: '1.0-rc2'
+	compile group: 'commons-io', name: 'commons-io', version: '2.5'
+	compile group: 'org.python', name: 'jython-standalone', version: '2.7.1'
+	runtime group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
+	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.7'
+//	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.9.1'
+	compile("io.springfox:springfox-swagger2:2.9.1") {
+		exclude module: 'swagger-annotations'
+		exclude module: 'swagger-models'
+	}
+	compile("io.swagger:swagger-annotations:1.5.21")
+	compile("io.swagger:swagger-models:1.5.21")
+	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.9.1'
+	compile fileTree(dir: 'src/main/resources/libs', include: '*.jar')
+	//runtime('mysql:mysql-connector-java')
+	testCompile('org.springframework.boot:spring-boot-starter-test')
+	// https://mvnrepository.com/artifact/com.h2database/h2
+	// testCompile group: 'com.h2database', name: 'h2', version: '1.4.197'
+	testCompile group: 'mysql', name: 'mysql-connector-java', version: '8.0.11'
+	compile group: 'org.springframework.restdocs', name: 'spring-restdocs-mockmvc', version: '2.0.0.RELEASE'
+	testCompile group: 'org.springframework.security', name: 'spring-security-test', version: '5.0.8.RELEASE'
+	testCompile group: 'org.powermock', name: 'powermock-module-junit4', version: '1.7.4'
+	testCompile group: 'org.powermock', name: 'powermock-api-mockito', version: '1.7.4'
+	compile group: 'commons-io', name: 'commons-io', version: '2.6'
+	compile group: 'org.apache.commons', name: 'commons-collections4', version: '4.2'
+
+}
+
