@@ -33,9 +33,8 @@ def runFullTest():
     #Create Study
     studyId= createStudyAndUser.create_study(authorisation, studyName, log)
 
-
     #Create List of users
-    subject_list=["p001b",  "p024a", "p057a", "p338b","p551a","p741b",]
+    subject_list=["p01",  "p02", "p03", "p04","p05","p06",]
     listOfCreatedSubjects = createStudyAndUser.createSubjects(authorisation, subject_list, studyId, log)
 
     #Check if all subjects are registered
@@ -44,15 +43,15 @@ def runFullTest():
     #change name of a subject
     operateOnSubjects.changeSubject(authorisation, listOfCreatedSubjects[0], log)
 
-    
     #upload two files
-    origPath = "empty"
-    file1= "%1.tsv" % origPath
-    file2= "%2.tsv" % origPath
-    file3= "%3.tsv" % origPath
-    file4= "%4.tsv" % origPath
-    file5= "%5.tsv" % origPath
-    file6= "%6.tsv" % origPath
+    origPath = "./testData/"
+    file1="%sp01@TestStudy@file.tsv"%origPath
+    file2="%sp02@TestStudy@file.tsv"%origPath
+    file3="%sp03@TestStudy@file.tsv"%origPath
+    file4="%sp04@TestStudy@file.tsv"%origPath
+    file5="%sp05@TestStudy@file.tsv"%origPath
+    file6="%sp06@TestStudy@file.tsv"%origPath
+    
     url="http://"+setting.httpPrefix+"/cheetah/api/user/uploadFile"
     files = [('files', (os.path.basename(file4), open(file4, 'rb'), 'application/octet-stream')),
              ('files', (os.path.basename(file5), open(file5, 'rb'), 'application/octet-stream')),
