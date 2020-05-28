@@ -22,5 +22,5 @@ After installation, it is recommomendet to test the program.
 This can be done via the *Unit Tests* that can be found in */src/test/java*.
 
 Furthermore, the program can be tested with the help of Python. In the 'TestForCheetah" dircectory there are several tests. To run the stack, execute *python3 stack.py* in the (or in an IDE). 
-The full test (*fullTest.py") does not work out of the box but needs data that it could use (the path must be changed in line 45 in the file (be aware of adjust all parameters of the file)
+To run the full test, you can uncomment the last line in the file or you can add it to the stack by uncommenting it.
 To be sure all dependencies are satisfied, please run *dep.py"
