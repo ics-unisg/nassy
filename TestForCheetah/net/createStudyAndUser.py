@@ -97,3 +97,25 @@ def createUserForTest():
         r = s.post("http://" + setting.httpPrefix + "/cheetah/api/user/addsubject", headers=headers, data=message)
         decode = r.content.decode('UTF-8')
         loads = json.loads(decode)
+
+
+def deleteUserForTest():
+    authorisation = {
+        'username': 'test.user@test.dcap',
+        'password': 'Test'
+    }
+    with rq.Session() as s:
+        s.post(url=url, data=authorisation)
+        r=s.get("http://"+setting.httpPrefix+"/cheetah/api/admin/user")
+
+
+        decode = r.content.decode('UTF-8')
+        loads = json.loads(decode)
+        response=loads["resBody"]
+        for u in response:
+            if u["email"] =="test.user@test.dcap":
+                r = s.delete("http://" + setting.httpPrefix + "/cheetah/api/admin/user/" + str(u["id"]))
+                decode = r.content.decode('UTF-8')
+                message = json.loads(decode)
+                print(message)
+        return response
