@@ -132,9 +132,12 @@ def compareStatistics(labelColumName, labelBuchstaben, fileFromDatabase, measure
 
 
 def compareFromDB(labelColumName, labelBuchstaben, dataFile, measures, log):
+    dbUser = input("Enter user database User: ")
+    dbPassword = input("Enter user password: ")
+
     connection = mc.connect(host=setting.hostName,
-                            user="dcapUser",
-                            passwd="dcap",
+                            user=dbUser,
+                            passwd=dbPassword,
                             db=setting.schemaName)
     cur = connection.cursor()
     cur.execute('SELECT path FROM user_data where pk_user_data =' + str(dataFile))
@@ -150,9 +153,12 @@ def compareFromDB(labelColumName, labelBuchstaben, dataFile, measures, log):
     compareStatistics(labelColumName,labelBuchstaben, fileFromDatabase, measureFile, log)
 
 def compareWithFile(labelColumName,labelBuchstaben, fileList, nameColumn, OrigPath, log):
+    dbUser = input("Enter user database User: ")
+    dbPassword = input("Enter user password: ")
+
     connection = mc.connect(host=setting.hostName,
-                            user=setting.dbUser,
-                            passwd=setting.dbPassword,
+                            user=dbUser,
+                            passwd=dbPassword,
                             db=setting.schemaName)
 
     for file in fileList:

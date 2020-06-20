@@ -4,10 +4,13 @@ import os
 from help import setting
 
 def deleteFromSystem(idArray):
-    connection = mc.connect (host = setting.hostName,
-                             user = setting.dbUser,
-                             passwd = setting.dbPassword,
-                             db = setting.schemaName)
+    dbUser = input("Enter user database User: ")
+    dbPassword = input("Enter user password: ")
+
+    connection = mc.connect(host=setting.hostName,
+                            user=dbUser,
+                            passwd=dbPassword,
+                            db=setting.schemaName)
 
     cur=connection.cursor()
 
@@ -29,5 +32,7 @@ def deleteFromSystem(idArray):
     cur.execute('SET FOREIGN_KEY_CHECKS=1;')
     connection.commit()
     connection.close
+
+
 
 deleteFromSystem([21405])

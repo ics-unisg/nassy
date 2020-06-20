@@ -2,10 +2,12 @@ import mysql.connector as mc
 import os
 
 from help import setting
+dbUser = input("Enter user database User: ")
+dbPassword= input("Enter user password: ")
 
 connection = mc.connect (host =setting.hostName,
-                         user = setting.dbUser,
-                         passwd = setting.dbPassword,
+                         user = dbUser,
+                         passwd = dbPassword,
                          db = setting.schemaName)
 
 cur=connection.cursor()

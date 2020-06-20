@@ -5,7 +5,6 @@ from net import userdata
 from net import createStudyAndUser
 from net import file
 import os
-from help import deletePFile
 from net.user import createNewUser, deleteUser, createNewUser2
 from help import setting
 
@@ -26,7 +25,6 @@ def checkRequirementTwo():
     helper.cleanDatabase(authorisation0, studyName)
 
     #cleans database
-    deletePFile.delete()
     #create log file
     log = logg.Logger("Requirement2_", "./logs/")
 

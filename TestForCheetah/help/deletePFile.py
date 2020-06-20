@@ -4,10 +4,13 @@ import os
 from help import setting
 
 def delete():
-    connection = mc.connect (host = setting.hostName,
-                             user = setting.dbUser,
-                             passwd = setting.dbPassword,
-                             db = setting.schemaName)
+    dbUser = input("Enter user database User: ")
+    dbPassword = input("Enter user password: ")
+
+    connection = mc.connect(host=setting.hostName,
+                            user=dbUser,
+                            passwd=dbPassword,
+                            db=setting.schemaName)
 
     cur=connection.cursor()
 
@@ -27,3 +30,4 @@ def delete():
     connection.close
 
 
+delete()

@@ -61,4 +61,4 @@ def checkFixations():
     #remove downloaded file
     os.remove(path)
 
-checkFixations()
+#checkFixations()

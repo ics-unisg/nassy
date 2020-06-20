@@ -1,4 +1,4 @@
-import os
+from net import user
 import json
 import  requests as rq
 from help import setting
@@ -85,8 +85,7 @@ def tryToCreateDoubleSubject(authorisation, subject, id, logFile):
             logFile.logHTTPResponse(__file__, "creation of double subjects failed because of unexpected reasons...", decode)
             logFile.close()
             raise RequirementError("could not create subjects")
-        
-        
+
 def createUserForTest():
     with rq.Session() as s:
         email = input("Enter user email: ")
@@ -94,7 +93,7 @@ def createUserForTest():
         authorisationtmp = {'username': email,'password': pwd}
         s.post(url=url, data=authorisationtmp)
         message="{ \"email\": \"test.user@test.dcap\", \"firstname\": \"Test\", \"id\": 0, \"lastname\": \"User\", \"password\": \"Test\", \"role\": \"administrator\"}"
-        r = s.post("http://" + setting.httpPrefix + "/cheetah/api/user/addsubject", headers=headers, data=message)
+        r = s.post("http://" + setting.httpPrefix + "/cheetah/api/admin/user", headers=headers, data=message)
         decode = r.content.decode('UTF-8')
         loads = json.loads(decode)
 
@@ -119,3 +118,5 @@ def deleteUserForTest():
                 message = json.loads(decode)
                 print(message)
         return response
+
+

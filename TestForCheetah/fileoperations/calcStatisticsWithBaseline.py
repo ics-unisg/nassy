@@ -137,10 +137,15 @@ def compareStatistics(labelColumName, labelBuchstaben, file, file1, base, log):
             raise RequirementError("Files are not equal")
 
 def compareFromDB(labelColumName,labelBuchstaben, file, file1,base, log):
+    dbUser = input("Enter user database User: ")
+    dbPassword = input("Enter user password: ")
+    schemaName= input("Enter schema name: ")
+
+
     connection = mc.connect(host=setting.hostName,
-                            user=setting.dbUser,
-                            passwd=setting.dbPassword,
-                            db=setting.schemaName)
+                            user=dbUser,
+                            passwd=dbPassword,
+                            db=schemaName)
     cur = connection.cursor()
     cur.execute('SELECT path FROM user_data where pk_user_data ='+str(file))
     path=cur.fetchone()

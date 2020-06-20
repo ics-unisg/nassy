@@ -17,9 +17,6 @@ authorisation = {
     'password': 'Test'
 }
 def runFullTest():
-
-    #uncomment if file is adjusted!
-    raise Exception("Check Files, they are not there out of the box")
     log = Logger("FullTest")
 
     #Standart name for test study
@@ -33,8 +30,9 @@ def runFullTest():
     #Create Study
     studyId= createStudyAndUser.create_study(authorisation, studyName, log)
 
+
     #Create List of users
-    subject_list=["p01",  "p02", "p03", "p04","p05","p06",]
+    subject_list=["p001b",  "p024a", "p057a", "p338b","p551a","p741b",]
     listOfCreatedSubjects = createStudyAndUser.createSubjects(authorisation, subject_list, studyId, log)
 
     #Check if all subjects are registered
@@ -44,14 +42,13 @@ def runFullTest():
     operateOnSubjects.changeSubject(authorisation, listOfCreatedSubjects[0], log)
 
     #upload two files
-    origPath = "./testData/"
-    file1="%sp01@TestStudy@file.tsv"%origPath
-    file2="%sp02@TestStudy@file.tsv"%origPath
-    file3="%sp03@TestStudy@file.tsv"%origPath
-    file4="%sp04@TestStudy@file.tsv"%origPath
-    file5="%sp05@TestStudy@file.tsv"%origPath
-    file6="%sp06@TestStudy@file.tsv"%origPath
-    
+    origPath = "/home/uli/masterGit/DatenBarbara/SM/FINAL TEST/"
+    file1= "%sp001b@TestStudy@p001b.tsv" % origPath
+    file2= "%sp024a@TestStudy@p024a.tsv" % origPath
+    file3= "%sp057a@TestStudy@p057a.tsv" % origPath
+    file4= "%sp338b@TestStudy@p338b.tsv" % origPath
+    file5= "%sp551a@TestStudy@p551a.tsv" % origPath
+    file6= "%sp741b@TestStudy@p741b.tsv" % origPath
     url="http://"+setting.httpPrefix+"/cheetah/api/user/uploadFile"
     files = [('files', (os.path.basename(file4), open(file4, 'rb'), 'application/octet-stream')),
              ('files', (os.path.basename(file5), open(file5, 'rb'), 'application/octet-stream')),
@@ -64,7 +61,7 @@ def runFullTest():
              ]
     fileIds2, fileIdsFull= uploadFilesViaNamingConvention.uploadFilesNaming(authorisation, files, url, log)
 
-    fileIds=fileIds2
+    fileIds=fileIds1
     fileIds=fileIds1+fileIds2
     #check if all filters are listed
     listOfFilters =  filterScripts.getListOfFilters(authorisation, log)
@@ -127,8 +124,10 @@ def runFullTest():
     for f in file_id:
 
         print(f[0], f[1])
-        calcStatisticsWithBaseline.compareFromDB("MediaName", {}, f[1],f[0] , "TUTX-Q03.png",log)
-
+        #calcStatisticsWithBaseline.compareFromDB("MediaName", {}, f[1],f[0] , "TUTX-Q03.png",log)
+        datafile=file.downloadFile(authorisation, f[1], "file"+str(f[1]),log)
+        measurfile=file.downloadFile(authorisation, f[0], "measure"+str(f[0]),log)
+        calcStatisticsWithBaseline.compareStatistics("MediaName", {}, datafile,measurfile , "TUTX-Q03.png",log)
 
 #runFullTest()
 
