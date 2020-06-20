@@ -88,7 +88,15 @@ def tryToCreateDoubleSubject(authorisation, subject, id, logFile):
 
 def createUserForTest():
     with rq.Session() as s:
-        email = input("Enter user email: ")
+
+        default = input("Is \"admin@administrator.dcap\" the default administrator user (y or n): ")
+        if default=="y":
+            email="admin@administrator.dcap"
+        elif default=="n":
+            email = input("Enter user email: ")
+        else:
+            print("Sorry, no \"y\" or \"n\" as answer")
+            exit()
         pwd= input("Enter user password: ")
         authorisationtmp = {'username': email,'password': pwd}
         s.post(url=url, data=authorisationtmp)

@@ -16,39 +16,38 @@ authorisation = {
     'username': 'test.user@test.dcap',
     'password': 'Test'
 }
-def runFullTest():
-    log = Logger("FullTest")
 
-    #Standart name for test study
+
+def runFullTest():
+
+    # Standart name for test study
     studyName = "TestStudy"
 
-    #create log file
+    # create log file
+    log = Logger("FullTest")
 
-    #Clean database with all artefacts of study
+    # Clean database with all artefacts of study
     helper.cleanDatabase(authorisation, studyName)
 
-    #Create Study
-    studyId= createStudyAndUser.create_study(authorisation, studyName, log)
+    # Create Study
+    studyId = createStudyAndUser.create_study(authorisation, studyName, log)
 
-
-    #Create List of users
-    subject_list=["p001b",  "p024a", "p057a", "p338b","p551a","p741b",]
+    # Create List of users
+    subject_list = ["p01", "p02", "p03", "p04", "p05", "p06", ]
     listOfCreatedSubjects = createStudyAndUser.createSubjects(authorisation, subject_list, studyId, log)
 
-    #Check if all subjects are registered
-    operateOnSubjects.checkAllSubjects(authorisation, subject_list, studyName, log)
-
-    #change name of a subject
+    # Check if all subjects are registered
     operateOnSubjects.changeSubject(authorisation, listOfCreatedSubjects[0], log)
 
-    #upload two files
-    origPath = "/home/uli/masterGit/DatenBarbara/SM/FINAL TEST/"
-    file1= "%sp001b@TestStudy@p001b.tsv" % origPath
-    file2= "%sp024a@TestStudy@p024a.tsv" % origPath
-    file3= "%sp057a@TestStudy@p057a.tsv" % origPath
-    file4= "%sp338b@TestStudy@p338b.tsv" % origPath
-    file5= "%sp551a@TestStudy@p551a.tsv" % origPath
-    file6= "%sp741b@TestStudy@p741b.tsv" % origPath
+    # upload two files
+    origPath = "./testData/"
+    file1 = "%sp01@TestStudy@file.tsv" % origPath
+    file2 = "%sp02@TestStudy@file.tsv" % origPath
+    file3 = "%sp03@TestStudy@file.tsv" % origPath
+    file4 = "%sp04@TestStudy@file.tsv" % origPath
+    file5 = "%sp05@TestStudy@file.tsv" % origPath
+    file6 = "%sp06@TestStudy@file.tsv" % origPath
+
     url="http://"+setting.httpPrefix+"/cheetah/api/user/uploadFile"
     files = [('files', (os.path.basename(file4), open(file4, 'rb'), 'application/octet-stream')),
              ('files', (os.path.basename(file5), open(file5, 'rb'), 'application/octet-stream')),
@@ -61,7 +60,7 @@ def runFullTest():
              ]
     fileIds2, fileIdsFull= uploadFilesViaNamingConvention.uploadFilesNaming(authorisation, files, url, log)
 
-    fileIds=fileIds1
+    fileIds=fileIds2
     fileIds=fileIds1+fileIds2
     #check if all filters are listed
     listOfFilters =  filterScripts.getListOfFilters(authorisation, log)

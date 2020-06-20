@@ -21,4 +21,3 @@ def getPathToFiles(string):
     else:
         string=string[5:]
         return "/home/uli/postCheetah/"+string
-print(getPathToFiles("/data/mydata"))
