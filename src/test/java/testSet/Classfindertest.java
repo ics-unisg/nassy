@@ -5,7 +5,6 @@ import com.dcap.DCAPMain;
 import com.dcap.filters.IDataFilter;
 import com.dcap.filters.SubstitutePupilFilter;
 import com.dcap.helper.MyLittleFactory;
-import com.dcap.myPlayGround.myPWD;
 import com.dcap.service.Exceptions.AbstractFilterException;
 import com.dcap.service.Exceptions.NoSuchFilterException;
 import org.junit.Assert;
@@ -81,14 +80,5 @@ public class Classfindertest {
         Thread.sleep(1000);
     }
 
-    @Test
-    public  void PWDTest() {
 
-        myPWD myPWD = new myPWD();
-        String test = passwordEncoder.encode("Test");
-        System.err.println(test);
-        Assert.assertTrue(passwordEncoder.matches("Test", test));
-//        Assert.assertEquals("$2a$11$AAsYroeMjQr4L1GAZmxZf.5yzsE0tbi9kq9MG4F.ShuSFfx/MvGg6", test);
-
-    }
 }
