@@ -2,6 +2,7 @@ package com.dcap.filters;
 
 import com.dcap.fileReader.DataFile;
 import com.dcap.fileReader.DataFileLine;
+import com.dcap.helper.DoubleColumnException;
 import com.dcap.service.threads.FilterData;
 import com.dcap.fileReader.DataFile;
 import com.dcap.fileReader.DataFileLine;
@@ -75,7 +76,7 @@ public abstract class AbstractTrimFilter extends AbstractDataFilter {
      * @return list fo booleans that decides if you should delete the row or not. false to delete, true to append it to the new file
      * @throws IOException
      */
-    protected abstract List<Boolean> createBooleanList(DataFile file, Map<String, String> columns) throws IOException, FilterException, FileException;
+    protected abstract List<Boolean> createBooleanList(DataFile file, Map<String, String> columns) throws IOException, FilterException, FileException, DoubleColumnException;
 
     @Override
     public Boolean isPreprocessing() {

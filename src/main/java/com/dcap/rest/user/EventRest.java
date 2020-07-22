@@ -7,6 +7,7 @@ import com.dcap.domain.UserData;
 import com.dcap.fileReader.DataFile;
 import com.dcap.fileReader.DataFileColumn;
 import com.dcap.fileReader.DataFileUtils;
+import com.dcap.helper.DoubleColumnException;
 import com.dcap.helper.FileException;
 import com.dcap.rest.DataMsg;
 import com.dcap.service.serviceInterfaces.UserServiceInterface;
@@ -68,7 +69,10 @@ public class EventRest {
         DataFile dataFile = null;
         try {
             dataFile = new DataFile(file,path, ",", true, ".");
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new DataMsg(102, null, e.getMessage(), null));
+        } catch (DoubleColumnException e) {
             e.printStackTrace();
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new DataMsg(102, null, e.getMessage(), null));
         }

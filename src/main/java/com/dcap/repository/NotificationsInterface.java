@@ -25,4 +25,5 @@ public interface NotificationsInterface extends JpaRepository<Notifications, Lon
     @Query(value = "update notifications set notifications.is_read=true where fk_user=:id", nativeQuery = true)
     public void setRead(@Param("id") Long id);
 
+    Notifications findByTaskId(String taskId);
 }

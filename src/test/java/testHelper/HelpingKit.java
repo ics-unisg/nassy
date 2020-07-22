@@ -2,6 +2,7 @@ package testHelper;
 
 import com.dcap.domain.User;
 import com.dcap.fileReader.DataFile;
+import com.dcap.helper.DoubleColumnException;
 import com.dcap.rest.DataMsg;
 import com.dcap.security.MyUserPrincipal;
 import com.dcap.helper.Pair;
@@ -71,6 +72,8 @@ public class HelpingKit {
         try {
             dataFile = new DataFile(file, pathname,"\t", true, ".");
         } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (DoubleColumnException e) {
             e.printStackTrace();
         }
         dataFile.getContent();

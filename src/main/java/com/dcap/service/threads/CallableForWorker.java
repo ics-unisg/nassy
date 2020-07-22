@@ -6,6 +6,7 @@ import com.dcap.fileReader.DataFile;
 import com.dcap.fileReader.DataFileColumn;
 import com.dcap.fileReader.DataFileHeader;
 import com.dcap.filters.*;
+import com.dcap.helper.DoubleColumnException;
 import com.dcap.helper.FileException;
 import com.dcap.helper.FilterException;
 import com.dcap.helper.Pair;
@@ -66,11 +67,19 @@ public class CallableForWorker implements CallableForWorkerInterface {
             } catch (FileNotFoundException e) {
                 //TODO bessere try-catch sachen
                 e.printStackTrace();
-            } catch (FileException e) {
-                e.printStackTrace();
+                String name = files.stream().map(entry -> entry.getKey().getFilename().toString()).collect(Collectors.joining(","));
+                threadResponseList.add(new ThreadResponse(id,"ERROR", "Error in filtering process for file(s) " +  name + ": " +e.getMessage(), null, name, user.getId(), null, e.getMessage() ));
+                return threadResponseList;
             } catch (IOException e) {
                 e.printStackTrace();
-            }
+                String name = files.stream().map(entry -> entry.getKey().getFilename().toString()).collect(Collectors.joining(","));
+                threadResponseList.add(new ThreadResponse(id,"ERROR", "Error in filtering process for file(s) " +  name + ": " +e.getMessage(), null, name, user.getId(), null, e.getMessage() ));
+                return threadResponseList;
+            } catch (DoubleColumnException e) {
+                e.printStackTrace();
+                String name = files.stream().map(entry -> entry.getKey().getFilename().toString()).collect(Collectors.joining(","));
+                threadResponseList.add(new ThreadResponse(id,"ERROR", "Error in filtering process for file(s) " +  name + ": " +e.getMessage(), null, name, user.getId(), null, e.getMessage() ));
+                return threadResponseList;            }
             FilterData dataToAdd = new FilterData(dataFile, file.getKey().getFilename(), file.getKey());
             filterDataList.add(dataToAdd);
         }
@@ -110,6 +119,9 @@ public class CallableForWorker implements CallableForWorkerInterface {
                 System.out.println("--------------------------------------");*/
             } catch (IOException e) {
                 e.printStackTrace();
+                String name = files.stream().map(entry -> entry.getKey().getFilename().toString()).collect(Collectors.joining(","));
+                threadResponseList.add(new ThreadResponse(id,"ERROR", "Error in filtering process for file(s) " +  name + ": " +e.getMessage(), null, name, user.getId(), null, e.getMessage() ));
+                return threadResponseList;
             } catch (Exception e) {
                 e.printStackTrace();
                 String name = files.stream().map(entry -> entry.getKey().getFilename().toString()).collect(Collectors.joining(","));

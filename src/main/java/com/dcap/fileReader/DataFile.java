@@ -13,6 +13,7 @@ import java.io.InputStreamReader;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import com.dcap.helper.DoubleColumnException;
 import com.dcap.helper.FileException;
 import com.dcap.helper.FilterException;
 import org.apache.commons.io.input.BOMInputStream;
@@ -64,7 +65,7 @@ public class DataFile {
         return content;
     }
 
-    public static DataFileHeader extractHeader(BufferedReader reader, String separator) throws IOException {
+    public static DataFileHeader extractHeader(BufferedReader reader, String separator) throws IOException, DoubleColumnException {
         String line = reader.readLine();
         DataFileHeader header = new DataFileHeader();
         String[] token=null;
@@ -78,23 +79,19 @@ public class DataFile {
         return header;
     }
 
-    public DataFile(File file, String path, String decimalSeparator) throws FileNotFoundException {
+    public DataFile(File file, String path, String decimalSeparator) throws IOException, DoubleColumnException {
         this(new BOMInputStream(new FileInputStream(file)), path, decimalSeparator);
     }
 
-    public DataFile(File file, String path, String separator, boolean hasHeader, String decimalSeparator) throws FileNotFoundException {
+    public DataFile(File file, String path, String separator, boolean hasHeader, String decimalSeparator) throws IOException, DoubleColumnException {
         this.separator = separator;
         this.hasHeader = hasHeader;
         this.decimalSeparator = decimalSeparator;
         this.path=path;
-        try {
-            read(new BOMInputStream(new FileInputStream(file)));
-        } catch (IOException e) {
-            //TODO do something senseful
-        }
+        read(new BOMInputStream(new FileInputStream(file)));
     }
 
-    public DataFile(InputStream input, String path, String separator, boolean hasHeader, String decimalSeparator) throws FileNotFoundException {
+    public DataFile(InputStream input, String path, String separator, boolean hasHeader, String decimalSeparator) throws IOException, DoubleColumnException {
         this(input, path, decimalSeparator);
         this.separator = separator;
         this.hasHeader = hasHeader;
@@ -102,30 +99,26 @@ public class DataFile {
         this.path=path;
     }
 
-    public DataFile(InputStream input, String path, String separator) {
+    public DataFile(InputStream input, String path, String separator) throws IOException, DoubleColumnException {
         this(input, path, SEPARATOR_TABULATOR, false);
     }
 
-    public DataFile(InputStream input, String path, String separatorToken, boolean hasHeader) {
+    public DataFile(InputStream input, String path, String separatorToken, boolean hasHeader) throws IOException, DoubleColumnException {
         this.separator = separatorToken;
         this.hasHeader = hasHeader;
         this.decimalSeparator = SEPARATOR_COMMA;
         this.path=path;
-        try {
-            read(input);
-        } catch (IOException e) {
-            //TODO do something senseful
-        }
+        read(input);
     }
 
-    public DataFile(String separator) throws IOException {
+    public DataFile(String separator) throws IOException, DoubleColumnException {
         this(new ByteArrayInputStream("".getBytes()), null, separator);
 
         header = new DataFileHeader();
         content = new LinkedList<>();
     }
 
-    public DataFile(String separator, boolean hasHeader) throws IOException {
+    public DataFile(String separator, boolean hasHeader) throws IOException, DoubleColumnException {
         this(new ByteArrayInputStream("".getBytes()), null, separator, hasHeader);
 
         header = new DataFileHeader();
@@ -161,7 +154,7 @@ public class DataFile {
     }
 
     @SuppressWarnings("unchecked")
-    public void addSceneColumn(DataFileColumn sceneDataColumn) throws IOException {
+    public void addSceneColumn(DataFileColumn sceneDataColumn) throws IOException, DoubleColumnException {
         if (content == null) {
             throw(new IOException("No Content"));
         }
@@ -205,7 +198,7 @@ public class DataFile {
      * @return
      * @throws IOException
      */
-    public DataFileColumn appendColumn(String columnName) throws IOException {
+    public DataFileColumn appendColumn(String columnName) throws IOException, DoubleColumnException {
         DataFileColumn column = header.appendColumn(columnName);
 
         // fill the new column with empty values
@@ -289,7 +282,7 @@ public class DataFile {
      * @param target the target column (will be created)
      * @throws IOException
      */
-    public void copyColumn(DataFileColumn toCopy, String target) throws IOException {
+    public void copyColumn(DataFileColumn toCopy, String target) throws IOException, DoubleColumnException {
         if (content == null) {
             throw(new IOException("No Content"));
         }
@@ -307,7 +300,7 @@ public class DataFile {
      * @return
      * @throws IOException
      */
-    public DataFile emptyCopy() throws IOException {
+    public DataFile emptyCopy() throws IOException, DoubleColumnException {
         DataFile copy = new DataFile(decimalSeparator);
         copy.separator = separator;
         for (DataFileColumn column : getHeader().getColumns()) {
@@ -414,7 +407,7 @@ public class DataFile {
     }
 
 
-    private List<IDataFileLine> read(InputStream input) throws IOException {
+    private List<IDataFileLine> read(InputStream input) throws IOException, DoubleColumnException {
         if (content != null) {
             return getLines();
         }
@@ -471,7 +464,7 @@ public class DataFile {
      * @param listForHeader
      * @throws IOException
      */
-    public void createHeader(List<String> listForHeader) throws IOException {
+    public void createHeader(List<String> listForHeader) throws IOException, DoubleColumnException {
         for (String headerElement : listForHeader) {
             this.appendColumn(headerElement);
         }
@@ -485,7 +478,7 @@ public class DataFile {
         this.header = header;
     }
 
-    public DataFile copyFile() throws IOException {
+    public DataFile copyFile() throws IOException, DoubleColumnException {
         if(content==null) {
             throw (new IOException("No Content"));
         }

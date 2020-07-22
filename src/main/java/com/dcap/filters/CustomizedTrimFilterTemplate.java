@@ -8,6 +8,7 @@ import com.dcap.domain.Pythoncode;
 import com.dcap.fileReader.DataFile;
 import com.dcap.fileReader.DataFileColumn;
 import com.dcap.fileReader.DataFileUtils;
+import com.dcap.helper.DoubleColumnException;
 import com.dcap.helper.FileException;
 import com.dcap.service.PythonCodeService;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -63,7 +64,7 @@ public class CustomizedTrimFilterTemplate extends AbstractTrimFilter {
      * @throws IOException
      */
     @Override
-    protected List<Boolean> createBooleanList(DataFile file, Map<String, String> columns) throws IOException, FileException {
+    protected List<Boolean> createBooleanList(DataFile file, Map<String, String> columns) throws IOException, FileException, DoubleColumnException {
         file=file.copyFile();//TODO check, if necessary
         ObjectMapper objectMapper = new ObjectMapper();
 

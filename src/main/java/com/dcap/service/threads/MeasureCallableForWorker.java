@@ -1,5 +1,6 @@
 package com.dcap.service.threads;
 
+import com.dcap.helper.DoubleColumnException;
 import com.dcap.service.serviceToolKit.ReportableResultWriter;
 import com.dcap.analyzer.*;
 import com.dcap.domain.User;
@@ -137,8 +138,9 @@ public class MeasureCallableForWorker implements CallableForWorkerInterface {
     }
 
     @Override
-    public Object call() throws FileException {
+    public Object call() {
        System.err.println("Start task");
+        ArrayList<ThreadResponse> threadResponses = new ArrayList<>();
         Map<String, ReportableResult> collectedResults = new HashMap<>();
 
 
@@ -157,15 +159,30 @@ public class MeasureCallableForWorker implements CallableForWorkerInterface {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            e.printStackTrace();
-        }
+            ThreadResponse response = new ThreadResponse(this.id, "ERROR","Problem with file " + this.file.getName()+"; "+e.getMessage() , null, this.file.getName(), this.user.getId(), null);
+            threadResponses.add(response);
+        } catch (FileException e) {
+            //ThreadResponse response = reportableResultWriter.write(this.id, this.user, this.file.getUserData(), subject, reportableResult, "measures_" + this.file.getName(), "comment", this.path);
+            ThreadResponse response = new ThreadResponse(this.id, "ERROR","Problem with file " + this.file.getName()+"; "+e.getMessage() , null, this.file.getName(), this.user.getId(), null);
+            threadResponses.add(response);
+            return threadResponses;
+        } catch (DoubleColumnException e) {
+            ThreadResponse response = new ThreadResponse(this.id, "ERROR","Problem with file " + this.file.getName()+"; "+e.getMessage() , null, this.file.getName(), this.user.getId(), null);
+            threadResponses.add(response);
+            return threadResponses;        }
         Map<String, DataFileColumn> columnsMap = new HashMap<>();
         for (String columName : this.columnNames) {
             DataFileColumn column = null;
             try {
                 column = dataFile.getHeader().getColumn(columName);
             } catch (IOException e) {
-                e.printStackTrace();
+                ThreadResponse response = new ThreadResponse(this.id, "ERROR","Problem with file " + this.file.getName()+"; "+e.getMessage() , null, this.file.getName(), this.user.getId(), null);
+                threadResponses.add(response);
+                return threadResponses;
+            } catch (FileException e) {
+                ThreadResponse response = new ThreadResponse(this.id, "ERROR","Problem with file " + this.file.getName()+"; "+e.getMessage() , null, this.file.getName(), this.user.getId(), null);
+                threadResponses.add(response);
+                return threadResponses;
             }
             columnsMap.put(columName, column);
         }
@@ -208,7 +225,7 @@ public class MeasureCallableForWorker implements CallableForWorkerInterface {
         // Locale.GERMAN));reportableResult.addResult("source_file_name",new ReportableResultEntry(fileName));reportableResult=
         ThreadResponse response = reportableResultWriter.write(this.id, this.user, this.file.getUserData(), subject, reportableResult, "measures_" + this.file.getName(), "comment", this.path);
 
-        ArrayList<ThreadResponse> threadResponses = new ArrayList<>();
+
 
         threadResponses.add(response);
         return threadResponses;

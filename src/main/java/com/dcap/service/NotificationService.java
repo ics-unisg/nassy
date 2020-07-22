@@ -77,5 +77,10 @@ public class NotificationService implements NotificationServiceInterface {
         return all;
     }
 
+    @Override
+    public Notifications getNotificationByTaskId(String taskId) {
+        return notificationsRepo.findByTaskId(taskId);
+    }
+
 
 }

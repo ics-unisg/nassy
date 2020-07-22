@@ -3,6 +3,7 @@ package fileReaderTestSet;
 import com.dcap.fileReader.DataFile;
 import com.dcap.fileReader.DataFileColumn;
 import com.dcap.fileReader.DataFileHeader;
+import com.dcap.helper.DoubleColumnException;
 import com.dcap.helper.FileException;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import org.junit.Assert;
@@ -29,7 +30,7 @@ public class DataFileHeaderTest extends RestTestInterface {
      * @throws IOException
      */
     @Before
-    public void setup() throws IOException {
+    public void setup() throws IOException, DoubleColumnException {
 
         dataFileGeneral = createFile("./dataForTesting/test.tsv");
 
@@ -53,7 +54,7 @@ public class DataFileHeaderTest extends RestTestInterface {
      * It is successful if there is the column added after this operation.
      */
     @Test
-    public void appendColumn() {
+    public void appendColumn() throws DoubleColumnException {
         int sizeBefore = dataFileHeaderFromFile.size();
         dataFileHeaderFromFile.appendColumn("Neu");
         int sizeAfter = dataFileHeaderFromFile.size();

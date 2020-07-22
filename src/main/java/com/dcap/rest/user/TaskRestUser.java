@@ -1,8 +1,10 @@
 package com.dcap.rest.user;
 
+import com.dcap.domain.Notifications;
 import com.dcap.domain.User;
 import com.dcap.domain.UserData;
 import com.dcap.rest.DataMsg;
+import com.dcap.service.serviceInterfaces.NotificationServiceInterface;
 import com.dcap.transferObjects.EasyUserData;
 import com.dcap.domain.User;
 import com.dcap.domain.UserData;
@@ -23,11 +25,13 @@ public class TaskRestUser {
 
     final UserDataServiceInterface userDataServiceInterface;
     final MySecurityAccessorInterface mySecurityAccessor;
+    final NotificationServiceInterface notificationServiceInterface;
 
     @Autowired
-    public TaskRestUser(UserDataServiceInterface userDataServiceInterface, MySecurityAccessorInterface mySecurityAccessor) {
+    public TaskRestUser(UserDataServiceInterface userDataServiceInterface, MySecurityAccessorInterface mySecurityAccessor, NotificationServiceInterface notificationServiceInterface) {
         this.userDataServiceInterface = userDataServiceInterface;
         this.mySecurityAccessor = mySecurityAccessor;
+        this.notificationServiceInterface = notificationServiceInterface;
     }
 
 
@@ -52,7 +56,12 @@ public class TaskRestUser {
         try {
             userDataByTaskId = userDataServiceInterface.getUserDataByTaskId(taskId);
         } catch (RepoExeption e) {
-            return ResponseEntity.ok(new DataMsg(0, "not finished", null, false));
+                Notifications notificationByTaskId = notificationServiceInterface.getNotificationByTaskId(taskId);
+                if(notificationByTaskId==null){
+                    return ResponseEntity.ok(new DataMsg(0, "not finished", null, false));
+            }else{
+                    return ResponseEntity.ok(new DataMsg(0, "finished_noData", notificationByTaskId.getMessage(), false));
+                }
         }
 
 

@@ -6,6 +6,7 @@ import com.dcap.fileReader.DataFile;
 import com.dcap.fileReader.DataFileColumn;
 import com.dcap.fileReader.DataFileHeader;
 import com.dcap.fileReader.DataFileUtils;
+import com.dcap.helper.DoubleColumnException;
 import com.dcap.helper.FileException;
 import com.dcap.rest.DataMsg;
 import com.dcap.service.serviceInterfaces.UserServiceInterface;
@@ -124,6 +125,9 @@ public class DataRestUser {
                 } catch (IOException e) {
                     e.printStackTrace();
                     //TODO check statuscode
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new DataMsg(1002, null, e.getMessage(), null));
+                } catch (DoubleColumnException e) {
+                    e.printStackTrace();
                     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new DataMsg(1002, null, e.getMessage(), null));
                 }
                 cacheDataFile(id, dataFile);

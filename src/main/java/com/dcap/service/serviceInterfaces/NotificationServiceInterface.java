@@ -19,4 +19,6 @@ public interface NotificationServiceInterface {
     void delete(Notifications notification);
 
     List<Notifications> getAllNotifications();
+
+    Notifications getNotificationByTaskId(String taskId);
 }

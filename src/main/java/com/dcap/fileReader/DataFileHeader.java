@@ -1,5 +1,6 @@
 package com.dcap.fileReader;
 
+import com.dcap.helper.DoubleColumnException;
 import com.dcap.helper.FileException;
 import com.dcap.helper.FilterException;
 
@@ -20,9 +21,9 @@ public class DataFileHeader implements IDataFileLine {
 		columns = new LinkedHashMap<String, DataFileColumn>();
 	}
 
-	public DataFileColumn appendColumn(String name) {
+	public DataFileColumn appendColumn(String name) throws DoubleColumnException {
 		if (columns.containsKey(name)) {
-			throw new RuntimeException("Column " + name + " is already present");
+			throw new DoubleColumnException("Column " + name + " is already present");
 		}
 
 		DataFileColumn column = new DataFileColumn(name, columns.size());

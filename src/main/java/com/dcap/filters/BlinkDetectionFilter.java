@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.*;
 
 import com.dcap.fileReader.*;
+import com.dcap.helper.DoubleColumnException;
 import com.dcap.service.threads.FilterData;
 import com.dcap.fileReader.*;
 import com.dcap.helper.FileException;
@@ -143,7 +144,12 @@ public class BlinkDetectionFilter extends AbstractChangingFilter {
 	 * @throws IOException
 	 */
 	private void copyMarks(DataFile file) throws IOException {
-		DataFileColumn blinkColumn = file.appendColumn(BLINK_COLUMN);
+		DataFileColumn blinkColumn = null;
+		try {
+			blinkColumn = file.appendColumn(BLINK_COLUMN);
+		} catch (DoubleColumnException e) {
+			e.printStackTrace();
+		}
 		setColumnsCountChanged(true);
 
 		for (DataFileLine line : file.getContent()) {

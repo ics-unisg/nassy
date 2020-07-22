@@ -7,8 +7,7 @@ import com.dcap.domain.UserData;
 import com.dcap.fileReader.DataFile;
 import com.dcap.fileReader.DataFileColumn;
 import com.dcap.fileReader.DataFileUtils;
-import com.dcap.helper.FileException;
-import com.dcap.helper.Pair;
+import com.dcap.helper.*;
 import com.dcap.rest.DataMsg;
 import com.dcap.rest.responses.FileUploadResponse;
 import com.dcap.service.storage.StorageService;
@@ -112,7 +111,12 @@ public class UploadMovieFileRestUser {
             }
         }
 
-        saveTheFiles(files, user, easyUserDataListSuccessfultMapped, userDataList);
+        try {
+            saveTheFiles(files, user, easyUserDataListSuccessfultMapped, userDataList);
+        } catch (DoubleColumnException e) {
+            e.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body( new DataMsg<>(602, null, "Double ColumnName: "+e.getMessage(), null));
+        }
 
         return ResponseEntity.status(HttpStatus.OK).body(new DataMsg(0, null, null,(new FileUploadResponse(null, easyUserDataListSuccessfultMapped))));
     }
@@ -132,12 +136,16 @@ public class UploadMovieFileRestUser {
             }
             userDataList.add(userDataById);
         }
-        saveTheFiles(files, user, easyUserDataListSuccessfultMapped, userDataList);
+        try {
+            saveTheFiles(files, user, easyUserDataListSuccessfultMapped, userDataList);
+        } catch (DoubleColumnException e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body( new DataMsg<>(602, null, "Double ColumnName: "+e.getMessage(), null));
+        }
         return ResponseEntity.status(HttpStatus.OK).body(new DataMsg<>(0, null, null,new FileUploadResponse(null, easyUserDataListSuccessfultMapped)));
 
     }
 
-    private void saveTheFiles(List<MultipartFile> files, User user, ArrayList<EasyUserData> easyUserDataListSuccessfultMapped, List<UserData> userDataList) throws IOException, FileException {
+    private void saveTheFiles(List<MultipartFile> files, User user, ArrayList<EasyUserData> easyUserDataListSuccessfultMapped, List<UserData> userDataList) throws IOException, FileException, DoubleColumnException {
         for(int i = 0; i<userDataList.size(); i++){
             Pair<String, String> pathNamePair = storageService.store(files.get(i), "data");
             String path = pathNamePair.getKey();
@@ -153,7 +161,7 @@ public class UploadMovieFileRestUser {
         }
     }
 
-    private Long getStartTimestamp(UserData userData, String timestampColumn, String seperator, String decimalSeperator) throws IOException, FileException {
+    private Long getStartTimestamp(UserData userData, String timestampColumn, String seperator, String decimalSeperator) throws IOException, FileException, DoubleColumnException {
         if(timestampColumn==null || timestampColumn.trim().equals("")){
             timestampColumn="EyeTrackerTimestamp";
         }
