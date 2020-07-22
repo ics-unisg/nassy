@@ -127,6 +127,8 @@ def runFullTest():
         datafile=file.downloadFile(authorisation, f[1], "file"+str(f[1]),log)
         measurfile=file.downloadFile(authorisation, f[0], "measure"+str(f[0]),log)
         calcStatisticsWithBaseline.compareStatistics("MediaName", {}, datafile,measurfile , "TUTX-Q03.png",log)
+        os.remove(datafile)
+        os.remove(measurfile)
 
 #runFullTest()
 
