@@ -1,6 +1,7 @@
 package fileReaderTestSet;
 
 import com.dcap.fileReader.*;
+import com.dcap.helper.DoubleColumnException;
 import com.dcap.helper.FileException;
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
@@ -263,7 +264,7 @@ public class DataFileTest extends RestTestInterface {
      * @throws IOException
      */
     @Test
-    public void checkHeaderAlternative() throws IOException {
+    public void checkHeaderAlternative() throws IOException, DoubleColumnException {
         DataFileHeader header = dataFileGeneral.getHeader();
         DataFileHeader dataFileHeader = new DataFileHeader();
         dataFileHeader.appendColumn("A");
@@ -350,7 +351,7 @@ public class DataFileTest extends RestTestInterface {
      * @throws IOException
      */
     @Test
-    public void copyFile() throws IOException {
+    public void copyFile() throws IOException, DoubleColumnException {
         DataFile dataFile = dataFileGeneral.copyFile();
         DataFile dataFileCopied = dataFile.copyFile();
         boolean equal = DataFileUtils.dataFileEquality(dataFile, dataFileCopied);

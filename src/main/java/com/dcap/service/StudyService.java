@@ -24,7 +24,7 @@ import java.util.stream.Collectors;
  */
 
 @Service
-public class StudyService implements StudyServiceInterface {
+public class    StudyService implements StudyServiceInterface {
 
     private final StudyInterface studyRepo;
     private final UsersInterface userRepo;
