@@ -1,0 +1,29 @@
+version: "3.9"
+services:
+  web:
+    build: .
+    ports:
+      - "8989:8989"
+    depends_on:
+      - "mysql"
+    environment:
+      WAIT_HOSTS: mysql:3306
+      
+  mysql:
+    image: "mysql"
+    command: --default-authentication-plugin=mysql_native_password
+    environment:
+      MYSQL_ROOT_PASSWORD: dcap
+      MYSQL_DATABASE: dcap
+      MYSQL_USER: dcap
+      MYSQL_PASSWORD: dcap
+    volumes:
+      - "./dbSchema/dcapSchema.sql:/docker-entrypoint-initdb.d/1.sql"
+    expose:
+      - '3306'
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
