@@ -83,6 +83,35 @@ def fullFilterData(authorisation, ids, logFile):
         print(taskIds)
         return taskIds
 
+
+
+nassy=",  \"filters\":  [" \
+"{  \"name\":  \"SubstitutePupilFilter\",  \"actualParameters\":  {  \"left_pupil\":  \"PupilLeft\",  \"right_pupil\":  \"PupilRight\",\"timestampcolumn\": \"EyeTrackerTimestamp\"},  \"columns\":  {\"left_pupil\":  \"PupilLeft\",  \"right_pupil\":  \"PupilRight\"  }  },  " \
+"{  \"name\":  \"SubstituteGazePointFilter\",  \"actualParameters\":  {  \"leftPupilGazeXName\":  \"GazePointLeftX (ADCSpx)\",  \"leftPupilGazeYName\":  \"GazePointLeftY (ADCSpx)\",\"rightPupilGazeXName\":  \"GazePointRightX (ADCSpx)\",\"rightPupilGazeYName\":  \"GazePointRightY (ADCSpx)\",\"timestampcolumn\":  \"EyeTrackerTimestamp\"},  \"columns\":  {}  },  " \
+"{  \"name\":  \"StandardDeviatonFilter\",  \"actualParameters\":  {\"timestampcolumn\":  \"EyeTrackerTimestamp\"},  \"columns\":  {\"left_pupil\":  \"PupilLeft\",  \"right_pupil\":  \"PupilRight\"}  },  " \
+"{  \"name\":  \"LinearInterpolationFilter\",  \"actualParameters\":  {  \"left_pupil\":  \"PupilLeft\",  \"right_pupil\":  \"PupilRight\" ,\"timestampcolumn\":  \"EyeTrackerTimestamp\" },  \"columns\":  { \"left_pupil\":  \"PupilLeft\",  \"right_pupil\":  \"PupilRight\"  }  },  " \
+"{  \"name\":  \"ButterworthFilter\",  \"actualParameters\":  {  \"hertz\":  \"4\",  \"sampleRate\":  \"300\",\"timestampcolumn\":  \"EyeTrackerTimestamp\"},  \"columns\":  {\"left_pupil\":  \"PupilLeft\",  \"right_pupil\":  \"PupilRight\"}  }  ],  \"decimalSeparator\":  \".\"  }"
+
+
+
+def nassyFilterData(authorisation, ids, logFile):
+    with rq.Session() as s:
+        s.post(url=url, data=authorisation)
+        dataString=s1+str(ids)+nassy
+        r = s.post("http://"+setting.httpPrefix+"/cheetah/api/user/filterrequest", data=dataString, headers={'content-type': "application/json"})
+        decode = r.content.decode('UTF-8')
+        loads = json.loads(decode)
+        logFile.logHTTPResponse(__file__, "filter all Files", loads)
+        taskIds = loads['resBody']
+        print(taskIds)
+        return taskIds
+
+
+
+
+
+
+
 s3= "{  " \
 "\"files\":  "
 
