@@ -1,4 +1,6 @@
+#!/usr/bin/python3
 import os
+import sys
 import net.createStudyAndUser as cu
 from logger import logg
 from net import createStudyAndUser, uploadFilesViaNamingConvention, filterScripts, file, tasks, measures, operateOnSubjects
@@ -11,8 +13,8 @@ from help import setting
 
 studyName = "TestStudy"
 authorisation = {
-    'username': 'test.user@test.dcap',
-    'password': 'Test'
+    'username': 'admin@administrator.dcap',
+    'password': 'lNvpjsZ'
 }
 helper.cleanDatabase(authorisation, studyName)
 
@@ -20,18 +22,15 @@ log = logg.Logger("test_", "./logs/")
 studyId = createStudyAndUser.create_study(authorisation, studyName, log)
 
 
-subject_list = ["p06"]
+subject_list = ["p07"]
 listOfCreatedSubjects = createStudyAndUser.createSubjects(authorisation, subject_list, studyId, log)
 operateOnSubjects.changeSubject(authorisation, listOfCreatedSubjects[0], log)
 
-file1 = "./testData/p06@TestStudy@file.tsv"
+file1 = sys.argv[1].replace('//', '/')
+
 files = [('files', (os.path.basename(file1), open(file1, 'rb'), 'application/octet-stream'))]
 url = "http://"+setting.httpPrefix+"/cheetah/api/user/uploadFile"
-
-print("========================")
-fileIds, fileIdsFull = uploadFilesViaNamingConvention.uploadFilesNaming(authorisation, files, url, log)
-
-print(fileIds)
+fileIds, fileIdsFull = uploadFilesViaNamingConvention.uploadFilesWithoutNaming(authorisation, files, listOfCreatedSubjects[0], url, log)
 
 
 #calculate measures
@@ -44,11 +43,7 @@ helper.waitTilfFinished(authorisation, measureTaskIds, log)
 measureFileId = tasks.getUserDataFileId(authorisation, measureTaskIds, log)[0]
 
 #download the measure file
-path = file.downloadFile(authorisation, measureFileId, "full", log)
-
-#verify the downloaded statistics, for statistics without baseline
-#calcStatisticsWithOutBaseline.compareStatistics("MediaName", {}, file1, path, log)
-print(path)
+print(file.downloadAndReadFile(authorisation, measureFileId, "full", log).decode("utf-8"))
 
 
 

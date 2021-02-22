@@ -8,7 +8,7 @@ class Logger:
 
     def __init__(self, name, path="./logs/"):
         self.logfile= self.create_file(name, path)
-        print(colored(name, "green"))
+        ##print(colored(name, "green"))
 
     def getFileName(self, file):
         return os.path.basename(file)
@@ -27,10 +27,12 @@ class Logger:
 
 
     def logHTTPResponse(self, file, where, message):
-        self.logfile.write("\n"+self.logString(file, where, message, "HTTP"))
+        pass
+        #self.logfile.write("\n"+self.logString(file, where, message, "HTTP"))
 
     def interlog(self, file, where, message, type):
-        self.logfile.write("\n" + self.logString(file, where, message, type))
+        pass
+        #self.logfile.write("\n" + self.logString(file, where, message, type))
 
     def create_file(self,name, path):
         file = path+(name) + str(datetime.date.today())

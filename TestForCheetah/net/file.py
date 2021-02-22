@@ -34,6 +34,13 @@ def downloadFile(authorisation, id, filename, logFile):
             logFile.logHTTPResponse(__file__, "in Download, ", "file with id " + str(id) + " was downloaded as " + filename+".tsv.")
             return './logs/'+filename+'.tsv'
 
+def downloadAndReadFile(authorisation, id, filename, logFile):
+    with rq.Session() as s:
+        s.post("http://"+setting.httpPrefix+"/cheetah/login", data=authorisation)
+        response = s.get("http://"+setting.httpPrefix+"/cheetah/api/user/download/"+str(id))
+        with open('./logs/'+filename+'.tsv', 'wb') as f:
+            return response.content
+
 def tryToDownloadFile(authorisation, id, logFile):
     with rq.Session() as s:
         s.post("http://"+setting.httpPrefix+"/cheetah/login", data=authorisation)

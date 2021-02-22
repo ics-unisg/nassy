@@ -16,5 +16,5 @@ with rq.Session() as s:
     r = s.post("http://"+setting.httpPrefix+"/cheetah/api/admin/user", headers=headers, data=newUser)
     decode = r.content.decode('UTF-8')
     message  = json.loads(decode)
-    print(message)
+    #print(message)
 

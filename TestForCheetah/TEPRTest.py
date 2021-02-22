@@ -117,7 +117,7 @@ def calculateTEPR(authorisation, logFile, ids, period, label="mylab", statistics
         loads = json.loads(decode)
         logFile.logHTTPResponse(__file__, "trim files", loads)
         taskIds = loads['resBody']
-        print(taskIds)
+        #print(taskIds)
         return taskIds
 
 checkFixations()

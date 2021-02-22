@@ -105,7 +105,7 @@ def runFullTest():
     #verify calculated measure
  #   for f in file_id:
 
- #       print(f[0], f[1])
+ #       #print(f[0], f[1])
  #       calcStatisticsWithOutBaseline.compareFromDB("MediaName", {}, f[1],f[0] , log)
 
     #############
@@ -122,7 +122,7 @@ def runFullTest():
     #verify calculated measure
     for f in file_id:
 
-        print(f[0], f[1])
+        #print(f[0], f[1])
         #calcStatisticsWithBaseline.compareFromDB("MediaName", {}, f[1],f[0] , "TUTX-Q03.png",log)
         datafile=file.downloadFile(authorisation, f[1], "file"+str(f[1]),log)
         measurfile=file.downloadFile(authorisation, f[0], "measure"+str(f[0]),log)

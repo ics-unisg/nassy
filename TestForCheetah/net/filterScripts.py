@@ -42,7 +42,7 @@ def checkFilterDetails(authorisation, filterName, details, logFile):
 
 
 
-        print(details in filterListe)
+        #print(details in filterListe)
 
 
 def getListOfFilters(authorisation, logFile):
@@ -80,17 +80,18 @@ def fullFilterData(authorisation, ids, logFile):
         loads = json.loads(decode)
         logFile.logHTTPResponse(__file__, "filter all Files", loads)
         taskIds = loads['resBody']
-        print(taskIds)
+        #print(taskIds)
         return taskIds
 
 
 
 nassy=",  \"filters\":  [" \
-"{  \"name\":  \"SubstitutePupilFilter\",  \"actualParameters\":  {  \"left_pupil\":  \"PupilLeft\",  \"right_pupil\":  \"PupilRight\",\"timestampcolumn\": \"EyeTrackerTimestamp\"},  \"columns\":  {\"left_pupil\":  \"PupilLeft\",  \"right_pupil\":  \"PupilRight\"  }  },  " \
-"{  \"name\":  \"SubstituteGazePointFilter\",  \"actualParameters\":  {  \"leftPupilGazeXName\":  \"GazePointLeftX (ADCSpx)\",  \"leftPupilGazeYName\":  \"GazePointLeftY (ADCSpx)\",\"rightPupilGazeXName\":  \"GazePointRightX (ADCSpx)\",\"rightPupilGazeYName\":  \"GazePointRightY (ADCSpx)\",\"timestampcolumn\":  \"EyeTrackerTimestamp\"},  \"columns\":  {}  },  " \
-"{  \"name\":  \"StandardDeviatonFilter\",  \"actualParameters\":  {\"timestampcolumn\":  \"EyeTrackerTimestamp\"},  \"columns\":  {\"left_pupil\":  \"PupilLeft\",  \"right_pupil\":  \"PupilRight\"}  },  " \
-"{  \"name\":  \"LinearInterpolationFilter\",  \"actualParameters\":  {  \"left_pupil\":  \"PupilLeft\",  \"right_pupil\":  \"PupilRight\" ,\"timestampcolumn\":  \"EyeTrackerTimestamp\" },  \"columns\":  { \"left_pupil\":  \"PupilLeft\",  \"right_pupil\":  \"PupilRight\"  }  },  " \
-"{  \"name\":  \"ButterworthFilter\",  \"actualParameters\":  {  \"hertz\":  \"4\",  \"sampleRate\":  \"300\",\"timestampcolumn\":  \"EyeTrackerTimestamp\"},  \"columns\":  {\"left_pupil\":  \"PupilLeft\",  \"right_pupil\":  \"PupilRight\"}  }  ],  \"decimalSeparator\":  \".\"  }"
+"{  \"name\":  \"SubstitutePupilFilter\",  \"actualParameters\":  {  \"left_pupil\":  \"ET_PupilLeft\",  \"right_pupil\":  \"ET_PupilRight\",\"timestampcolumn\": \"Timestamp\"},  \"columns\":  {\"left_pupil\":  \"ET_PupilLeft\",  \"right_pupil\":  \"ET_PupilRight\"  }  } " \
+",{  \"name\":  \"SubstituteGazePointFilter\",  \"actualParameters\":  {  \"leftPupilGazeXName\":  \"ET_GazeLeftx\",  \"leftPupilGazeYName\":  \"ET_GazeLefty\",\"rightPupilGazeXName\":  \"ET_GazeRightx\",\"rightPupilGazeYName\":  \"ET_GazeRighty\",\"timestampcolumn\":  \"Timestamp\"},  \"columns\":  {}  }  " \
+",{  \"name\":  \"StandardDeviatonFilter\",  \"actualParameters\":  {\"timestampcolumn\":  \"Timestamp\"},  \"columns\":  {\"left_pupil\":  \"ET_PupilLeft\",  \"right_pupil\":  \"ET_PupilRight\"}  }  " \
+",{  \"name\":  \"LinearInterpolationFilter\",  \"actualParameters\":  {  \"left_pupil\":  \"ET_PupilLeft\",  \"right_pupil\":  \"ET_PupilRight\" ,\"timestampcolumn\":  \"Timestamp\" },  \"columns\":  { \"left_pupil\":  \"ET_PupilLeft\",  \"right_pupil\":  \"ET_PupilRight\"  }  }  " \
+",{  \"name\":  \"ButterworthFilter\",  \"actualParameters\":  {  \"hertz\":  \"4\",  \"sampleRate\":  \"60\",\"timestampcolumn\":  \"Timestamp\"},  \"columns\":  {\"left_pupil\":  \"ET_PupilLeft\",  \"right_pupil\":  \"ET_PupilRight\"}  } " \
+"],  \"decimalSeparator\":  \".\"  }"
 
 
 
@@ -103,7 +104,7 @@ def nassyFilterData(authorisation, ids, logFile):
         loads = json.loads(decode)
         logFile.logHTTPResponse(__file__, "filter all Files", loads)
         taskIds = loads['resBody']
-        print(taskIds)
+        #print(taskIds)
         return taskIds
 
 
@@ -149,7 +150,7 @@ def filterData(authorisation, ids, filter, logFile):
         loads = json.loads(decode)
         logFile.logHTTPResponse(__file__, "filter all Files with " +filter, loads)
         taskIds = loads['resBody']
-        print(taskIds)
+        #print(taskIds)
         return taskIds
 
 
@@ -165,7 +166,7 @@ def trimFilterData(authorisation, ids, logFile):
         loads = json.loads(decode)
         logFile.logHTTPResponse(__file__, "trim files", loads)
         taskIds = loads['resBody']
-        print(taskIds)
+        #print(taskIds)
         return taskIds
 
 
@@ -183,7 +184,7 @@ def labelFilterData(authorisation, ids, logFile):
         loads = json.loads(decode)
         logFile.logHTTPResponse(__file__, "label files", loads)
         taskIds = loads['resBody']
-        print(taskIds)
+        #print(taskIds)
         return taskIds
 
 
@@ -198,7 +199,7 @@ def trimLabelFilterData(authorisation, ids, logFile):
         loads = json.loads(decode)
         logFile.logHTTPResponse(__file__, "trim label files", loads)
         taskIds = loads['resBody']
-        print(taskIds)
+        #print(taskIds)
         return taskIds
 
 def ownFilterScript(authorisation, fileId, jsonString, logFile):
@@ -211,7 +212,7 @@ def ownFilterScript(authorisation, fileId, jsonString, logFile):
         loads = json.loads(decode)
         logFile.logHTTPResponse(__file__, "trim label files", loads)
         taskIds = loads['resBody']
-        print(taskIds)
+        #print(taskIds)
         return taskIds
 
 def doFilterData(authorisation, jsonString, fileId, name, log):
@@ -224,16 +225,16 @@ def doFilterData(authorisation, jsonString, fileId, name, log):
         loads = json.loads(decode)
         log.logHTTPResponse(__file__, " filter file for "+name, loads)
         taskIds = loads['resBody']
-        print(taskIds)
+        #print(taskIds)
         return taskIds
 
 def checkIfFinished(s, taskId):
     task_id = "http://"+setting.httpPrefix+"/cheetah/api/user/taskFinished/" + taskId
-    print(task_id)
-    # print(task_id)
+    #print(task_id)
+    # #print(task_id)
     resp = s.get(task_id)
     ret = json.loads(resp.content)['resBody']
-    print(ret)
+    #print(ret)
     return ret
 
 
@@ -296,13 +297,13 @@ def deleteFilter(authorisation, name, logFile):
 
         # checks, if the name is in the list
         if not job_data["name"] in myList:
-            print("Filter not in list")
+            #print("Filter not in list")
             exit
 
         status = "the code was uploaded."
         if (statusCode == 105):
             status = "the code is already on the server."
-        print("Test successful, " + status)
+        #print("Test successful, " + status)
 
 #loggerDumg = Logger();
 

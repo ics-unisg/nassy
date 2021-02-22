@@ -19,11 +19,17 @@ services:
       MYSQL_PASSWORD: dcap
     volumes:
       - "./dbSchema/dcapSchema.sql:/docker-entrypoint-initdb.d/1.sql"
+      - ./data:/var/lib/mysql
     expose:
       - '3306'
 
-  adminer:
-    image: adminer
-    restart: always
+  nifi:
+    build: ./nifi
     ports:
       - 8080:8080
+    
+    volumes:
+      - ./files:/files
+      - ./:/code
+
+  

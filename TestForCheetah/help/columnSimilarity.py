@@ -34,5 +34,5 @@ for i in range(len(mnOne)):
 
 
 
-print(st.mean(oneValues))
-#print(twoValues)
+#print(st.mean(oneValues))
+##print(twoValues)

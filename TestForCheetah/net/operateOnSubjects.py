@@ -15,7 +15,7 @@ def checkAllSubjects(authorisation, list, studyname, log):
         r = s.get("http://"+setting.httpPrefix+"/cheetah/api/user/subjects", data=authorisation)
         decode = r.content.decode('UTF-8')
 
-        print(decode)
+        #print(decode)
 
         loads = json.loads(decode)
         testArray = []
@@ -57,7 +57,7 @@ def changeSubjectName(authorisation, sub_id, name, log):
         subject2["email"] =  name + "@1234.com"
 
         headers = {'content-type': 'application/json'}
-        print(subject2)
+        #print(subject2)
         r = s.put("http://"+setting.httpPrefix+"/cheetah/api/user/updatesubject", headers=headers, json=subject2)
         log.interlog(__file__, "change Subject", str("Subject changed"), "Check")
 
@@ -76,12 +76,12 @@ def changeSubject(authorisation, sub_id, log):
         subject2=copy.deepcopy(subject1)
         subject2["comment"]="CHANGED"
         headers = {'content-type': 'application/json'}
-        print(subject2)
+        #print(subject2)
         r = s.put("http://"+setting.httpPrefix+"/cheetah/api/user/updatesubject", headers=headers, json=subject2)
         decode = r.content.decode('UTF-8')
 
         load = json.loads(decode)
-        print(decode)
+        #print(decode)
         r = s.get(subjectUrl)
         subject3=json.loads(r.content.decode('UTF-8'))["resBody"]
 
@@ -94,7 +94,7 @@ def getSubjectIdByName(authorisation, subject_name, log):
         r = s.get("http://"+setting.httpPrefix+"/cheetah/api/user/subjects", data=authorisation)
         decode = r.content.decode('UTF-8')
 
-        print(decode)
+        #print(decode)
 
         loads = json.loads(decode)
         testArray = []

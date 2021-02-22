@@ -14,4 +14,4 @@ with rq.Session() as s:
     response = s.get("http://"+setting.httpPrefix+"/cheetah/api/admin/clean/yes")
     decode = response.content.decode('UTF-8')
     loads = json.loads(decode)
-    print(loads)
+    #print(loads)

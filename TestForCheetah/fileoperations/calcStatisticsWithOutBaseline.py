@@ -47,10 +47,10 @@ def checkEquality(fileToCheck, name, valueToCheck, log, everythingFineFlag):
     errorValue = valueToCheck - valueToConfirm
     if np.abs(errorValue) > 0.0001:
         alarm = str("Error"+ "  " + str(errorValue) +"  " +str(valueToCheck) + "  " + str(valueToConfirm) + "  " + name)
-        print(colored(alarm, 'red'))
+        #print(colored(alarm, 'red'))
         log.interlog(__file__, "checkSimilarity", "Error in Equality: " + name, "Equality")
         everythingFineFlag = False
-    print(name, valueToCheck, valueToConfirm)
+    #print(name, valueToCheck, valueToConfirm)
     return everythingFineFlag
 
 def createLabels(file, labelColumName):

@@ -7,7 +7,7 @@ from help import setting
 def calculateMeasures(authorisation, baseline, columNames, fileIDs, labelColumn, labels, timeStampColumnNAme, logFile):
     dataString = "{\"baseline\":\"%s\",\"columnNames\":%s,\"fileIds\":%s,\"labelColumn\":\"%s\",\"labels\":%s,\"timeStampColumnName\":\"%s\"};" % (
         baseline, columNames, fileIDs, labelColumn, labels, timeStampColumnNAme);
-    print(dataString)
+    #print(dataString)
     url = "http://"+setting.httpPrefix+"/cheetah/login"
     with rq.Session() as s:
         s.post(url=url, data=authorisation)
@@ -16,7 +16,7 @@ def calculateMeasures(authorisation, baseline, columNames, fileIDs, labelColumn,
         loads = json.loads(decode)
         logFile.logHTTPResponse(__file__, "Measure the files " + str(fileIDs), str(loads)   )
         taskIds = loads['resBody']
-        print(taskIds)
+        #print(taskIds)
         return taskIds
 
 

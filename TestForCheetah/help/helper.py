@@ -15,16 +15,17 @@ def cleanDatabase(authorisation, studyname):
         r=s.get(url=url)
         decode = r.content.decode('UTF-8')
 
-
         loads = json.loads(decode)
+        #print(loads)
 
         for e in loads["resBody"]:
             if e["name"] == studyname:
                 idToDel = "http://"+setting.httpPrefix+"/cheetah/api/admin/study/" + str(e["id"])
                 r1=s.delete(idToDel)
-                print(r1)
+                #print(r1)
                 if r1.status_code==200:
-                    print("Old study deleted")
+                    pass
+                    #print("Old study deleted")
                 else:
                     raise RequirementError("error while deleting")
 
@@ -60,7 +61,7 @@ def waitTilfFinished(authorisation, taskIds, logFile):
                 if (checkIfFinished(s, entry)):
                     idList.remove(entry)
             time.sleep(1)
-            print(index)
+            #print(index)
             index = index + 1
         logFile.interlog(__file__, "tasks finished", "Tasks  "+taskIds + " are finished.",
                      "Check")

@@ -1,4 +1,5 @@
-httpPrefix="localhost:8989"
+httpPrefix="web:8989"
+#httpPrefix="localhost:8989"
 #httpPrefix="localhost:4000"
 #httpPrefix="172.18.03:8989"
 
@@ -10,14 +11,10 @@ httpPrefix="localhost:8989"
 
 
 
-hostName = "localhost"
+hostName = "web"
 schemaName= ""
 dbUser=""
 dbPassword=""
 
 def getPathToFiles(string):
-    if(hostName=="localhost"):
-        return ".."+string
-    else:
-        string=string[5:]
-        return "/home/uli/postCheetah/"+string
+    return ".."+string

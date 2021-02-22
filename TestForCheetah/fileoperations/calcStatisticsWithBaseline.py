@@ -41,10 +41,10 @@ def checkEquality(fileToCheck, name, valueToCheck, log, everythinFineFlag):
     errorValue = valueToCheck - valueToConfirm
     if np.abs(errorValue) > 0.0002:
         message="Error" +"  "+ str(errorValue)+"  "+ str(valueToCheck)+"  "+ str(valueToConfirm)+"  "+ name
-        print(colored(message, "red"))
+        #print(colored(message, "red"))
         log.interlog(__file__, "checkSimilarity", "Error in Equality: "+ name, "Equality, " + str(errorValue)+ " "+ str(valueToCheck)+ " "+ str(valueToConfirm))
         everythinFineFlag=False
-    print(name+": from server "+ str(valueToConfirm) +", cacluated in Python: "+str(valueToCheck) + ", difference: "+ str(errorValue) )
+    #print(name+": from server "+ str(valueToConfirm) +", cacluated in Python: "+str(valueToCheck) + ", difference: "+ str(errorValue) )
     return everythinFineFlag
 
 
@@ -91,7 +91,7 @@ def compareStatistics(labelColumName, labelBuchstaben, file, file1, base, log):
                 except AttributeError:
                     resRight = float(right.get(i))
                 actualLabelValue = label.get(i)
-                #            print(resLeft, resRight, actualLabelValue)
+                #            #print(resLeft, resRight, actualLabelValue)
                 if (actualLabelValue in labelBuchstaben):
                     labelListLeft[actualLabelValue].append(resLeft)
                     labelListRight[actualLabelValue].append(resRight)
@@ -99,16 +99,16 @@ def compareStatistics(labelColumName, labelBuchstaben, file, file1, base, log):
                     baseLineValuesLeft.append(resLeft)
                     baseLineValuesRight.append(resRight)
 
-        #    print(labelListLeft)
-        #    print(baseLineValuesLeft)
+        #    #print(labelListLeft)
+        #    #print(baseLineValuesLeft)
 
         average = np.mean
         meanLeft = average(baseLineValuesLeft)
-        print("baseline left", meanLeft)
+        #print("baseline left", meanLeft)
         meanRight = average(baseLineValuesRight)
-        print("baseline right", meanRight)
+        #print("baseline right", meanRight)
         meanBoth = average([meanLeft, meanRight])
-        print("baseline general", meanBoth)
+        #print("baseline general", meanBoth)
         averageList = createAverageArray(labelListLeft, labelListRight)
 
         statistics = [("average", average), ("median", np.median), ("max", np.max), ("min", np.min),

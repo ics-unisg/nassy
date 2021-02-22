@@ -95,7 +95,7 @@ def createUserForTest():
         elif default=="n":
             email = input("Enter user email: ")
         else:
-            print("Sorry, no \"y\" or \"n\" as answer")
+            #print("Sorry, no \"y\" or \"n\" as answer")
             exit()
         pwd= input("Enter user password: ")
         authorisationtmp = {'username': email,'password': pwd}
@@ -124,7 +124,7 @@ def deleteUserForTest():
                 r = s.delete("http://" + setting.httpPrefix + "/cheetah/api/admin/user/" + str(u["id"]))
                 decode = r.content.decode('UTF-8')
                 message = json.loads(decode)
-                print(message)
+                #print(message)
         return response
 
 

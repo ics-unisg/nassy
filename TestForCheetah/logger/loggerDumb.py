@@ -13,7 +13,7 @@ class Logger:
             message="Ojeh"
         msg = self.getFileName(file) + "; " + str(
             datetime.datetime.now()) + "; " + where + "; " + message + "; " + messageType
-        print(msg)
+        ##print(msg)
         return msg
 
     def logHTTPResponse(self, file, where, message):
@@ -24,7 +24,7 @@ class Logger:
             message = "Ojeh"
         msg = self.getFileName(file) + "; " + str(
             datetime.datetime.now()) + "; " + where + "; " + message + "; " + messageType
-        print(msg)
+        ##print(msg)
         return msg
 
 
@@ -32,5 +32,5 @@ class Logger:
         self.logString(file, where, message, messageType)
 
     def close(self):
-        print("Error")
+        ##print("Error")
         pass

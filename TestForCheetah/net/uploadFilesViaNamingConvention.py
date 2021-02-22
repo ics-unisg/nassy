@@ -25,7 +25,6 @@ def uploadFilesNaming(authorisation, files, url, logFile):
         job_data = {'subjectIds': ""}
         s.post(url=loginUrl, data=authorisation)
         r = s.post(url, data= job_data,files=files)
-        print(r)
         response = r.content.decode('UTF-8')
 
         responseAsJSON = json.loads(response)
@@ -46,10 +45,10 @@ def uploadFilesWithoutNaming(authorisation, files, subjects, url, logFile):
         job_data = {'subjectIds': [subjects]}
         s.post(url=loginUrl, data=authorisation)
         r = s.post(url, data=job_data, files=files)
-        print(r)
         response = r.content.decode('UTF-8')
 
         responseAsJSON = json.loads(response)
+
         mapped = responseAsJSON["resBody"]["easyUserDataListSuccessfultMapped"]
         returnlistFull = []
         returnlistIds = []

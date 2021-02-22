@@ -9,8 +9,8 @@ fileToCheckOne = pd.read_csv(fileOne, delimiter=";")
 fileToCheckTwo = pd.read_csv(fileTwo, delimiter=";")
 
 labelsOne=fileToCheckOne["average_meanValueOfTimeSlot_M1B-Q01.png"]
-print(labelsOne)
+#print(labelsOne)
 
 
 labelsTwo=fileToCheckTwo["average_meanValueOfTimeSlot_a"]
-print(labelsTwo)
+#print(labelsTwo)

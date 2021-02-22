@@ -19,6 +19,6 @@ class myPythonClass():
 
         resultingColumnsAsDic = {parameters["left_pupil"]: leftsFloat}
 
-        print(resultingColumnsAsDic)
+        #print(resultingColumnsAsDic)
 
         return json.dumps(resultingColumnsAsDic)

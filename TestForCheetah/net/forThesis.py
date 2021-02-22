@@ -23,4 +23,4 @@ with rq.Session() as s:
     loads = json.loads(decode)
     taskIds = loads['resBody']
 
-print(taskIds)
+#print(taskIds)

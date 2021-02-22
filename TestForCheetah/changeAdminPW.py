@@ -13,7 +13,7 @@ with rq.Session() as s:
     elif default=="n":
         email = input("Enter user email: ")
     else:
-        print("Sorry, no \"y\" or \"n\" as answer")
+        #print("Sorry, no \"y\" or \"n\" as answer")
         exit()
     pwd= input("Enter user password: ")
     authorisationtmp = {'username': email ,'password': pwd}
@@ -22,10 +22,10 @@ with rq.Session() as s:
     pwd1= input("Enter new password: ")
     pwd2= input("Re-enter new password: ")
     if pwd1!=pwd2:
-        print("Sorry, not same pwd")
+        #print("Sorry, not same pwd")
         exit()
 
     message = "{\"pwd\":\"%s\"}" % (pwd1);
     r = s.post("http://" + setting.httpPrefix + "/cheetah/api/user/user", headers=headers, data=message)
     decode = r.content.decode('UTF-8')
-    print(decode)
+    #print(decode)

@@ -23,7 +23,7 @@ path=".."
 testString = """delete from user_data where pk_user_data ={userDataId};"""
 for e in fetchall:
     if not os.path.exists(path+str(e[1])[1:]):
-        print(e[0],str(e[1])[1:])
+        #print(e[0],str(e[1])[1:])
         newTestString = testString.format(userDataId=e[0])
         cur.execute(newTestString)
 connection.commit()

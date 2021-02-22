@@ -22,7 +22,7 @@ def createNewUser(authorisation, log):
             return ({'username': '123@yahoo.com','password': '123'}, message["resBody"]["id"])
 
         else:
-            print(message)
+            #print(message)
             log.logHTTPResponse(__file__, "createNewUser", "Could not create User.")
             log.close()
             raise RequirementError("no user created.")
@@ -34,7 +34,7 @@ def createNewUser2(authorisation, log):
         r = s.post("http://"+setting.httpPrefix+"/cheetah/api/admin/user", headers=headers, data=newUser)
         decode = r.content.decode('UTF-8')
         message  = json.loads(decode)
-        print(message)
+        #print(message)
         if message["statusCode"]==0:
             return ({'username': '1234@yahoo.com','password': '123'}, message["resBody"]["id"])
             log.logHTTPResponse(__file__, "createNewUser", "User2 with mailadress 1234@yahoo.com created.")
@@ -50,7 +50,7 @@ def deleteUser(authorisation, id, log):
         r = s.delete("http://"+setting.httpPrefix+"/cheetah/api/admin/user/"+str(id))
         decode = r.content.decode('UTF-8')
         message = json.loads(decode)
-        print(message)
+        #print(message)
         return
         if message["resBody"] == True:
             log.logHTTPResponse(__file__, "deleteUser", "User deleted.")

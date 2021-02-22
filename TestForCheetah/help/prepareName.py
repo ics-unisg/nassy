@@ -13,14 +13,14 @@ def renameFiles():
     for file in files:
         if file.endswith("tsv"):
             name=file.split(".")
-            print(name[0])
+            #print(name[0])
             rename(file, name)
 
 def getSubjects():
     for file in files:
         if file.endswith("tsv"):
             name=file.split("@")
-            print(name[0])
+            #print(name[0])
 
 
 getSubjects()
