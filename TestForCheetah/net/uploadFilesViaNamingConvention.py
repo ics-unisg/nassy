@@ -49,6 +49,8 @@ def uploadFilesWithoutNaming(authorisation, files, subjects, url, logFile):
 
         responseAsJSON = json.loads(response)
 
+        #raise Exception(responseAsJSON)
+
         mapped = responseAsJSON["resBody"]["easyUserDataListSuccessfultMapped"]
         returnlistFull = []
         returnlistIds = []
