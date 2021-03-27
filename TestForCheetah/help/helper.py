@@ -16,7 +16,6 @@ def cleanDatabase(authorisation, studyname):
         decode = r.content.decode('UTF-8')
 
         loads = json.loads(decode)
-        #print(loads)
 
         for e in loads["resBody"]:
             if e["name"] == studyname:

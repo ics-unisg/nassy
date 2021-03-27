@@ -17,3 +17,4 @@ RUN pip3 install mysql-connector-python
 RUN pip3 install statistics
 RUN pip3 install numpy
 RUN pip3 install requests
+RUN pip3 install torch

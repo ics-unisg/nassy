@@ -2,6 +2,7 @@
  
 import pandas as pd
 import sys
+from copy import copy
 
 def extract_features(df):
     df_min, df_max, df_mean, df_median, df_std = df['ET_PubilAvg'].agg([pd.np.min, pd.np.max, pd.np.mean, pd.np.median, pd.np.std])
@@ -27,12 +28,20 @@ df = df.set_index(pd.TimedeltaIndex(df['Timestamp'].values))
 df['ET_PubilAvg'] = df.apply(lambda x: (x['ET_PupilLeft'] + x['ET_PupilRight']) / 2, axis=1)
 
 
-baseline = df[df['type'] == 'B']
+baseline = copy(df[df['type'] == 'B'])
+baseline = baseline.set_index(pd.TimedeltaIndex(baseline['Timestamp'].values))
 b_min, b_max, b_mean, b_median, b_std, b_peak_count, b_peak_count_pm = extract_features(baseline)
+b_start = baseline.iloc[0]['Timestamp']
+b_end = baseline.iloc[-1]['Timestamp']
+b_duration = b_end - b_start
 
-
-experiment = df[df['type'] == 'M']
+experiment = copy(df[df['type'] == 'M'])
+experiment = experiment.set_index(pd.TimedeltaIndex(experiment['Timestamp'].values))
 e_min, e_max, e_mean, e_median, e_std, e_peak_count, e_peak_count_pm = extract_features(experiment)
+e_start = experiment.iloc[1]['Timestamp']
+e_end = experiment.iloc[-1]['Timestamp']
+e_duration = e_end - e_start
+e_distance = e_start - b_end
 
 d_mean = b_mean - e_mean
 d_median = b_median - e_median
@@ -40,6 +49,6 @@ d_std = b_std - e_std
 
 
 
-print(f'd_mean,d_median,d_std,e_min,e_max,e_mean,e_median,e_std,e_peak_count,e_peak_count_pm,b_min,b_max,b_mean,b_median,b_std,b_peak_count,b_peak_count_pm')
-print(f'{d_mean},{d_median},{d_std},{e_min},{e_max},{e_mean},{e_median},{e_std},{e_peak_count},{e_peak_count_pm},{b_min},{b_max},{b_mean},{b_median},{b_std},{b_peak_count},{b_peak_count_pm}')
+print(f'subject,task,d_mean,d_median,d_std,e_min,e_max,e_mean,e_median,e_std,e_peak_count,e_peak_count_pm,b_min,b_max,b_mean,b_median,b_std,b_peak_count,b_peak_count_pm,b_start,b_duration,e_start,e_duration,e_distance')
+print(f'{df.iloc[0]["subject"]},{df.iloc[0]["task"]},{d_mean},{d_median},{d_std},{e_min},{e_max},{e_mean},{e_median},{e_std},{e_peak_count},{e_peak_count_pm},{b_min},{b_max},{b_mean},{b_median},{b_std},{b_peak_count},{b_peak_count_pm},{b_start},{b_duration},{e_start},{e_duration},{e_distance}')
 
