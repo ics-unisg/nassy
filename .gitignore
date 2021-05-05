@@ -23,3 +23,6 @@ TestForCheetah/logs/
 
 
 **/*.properties
+
+**/*.ipynb_checkpoints
+**/*.vscode/
