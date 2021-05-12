@@ -31,9 +31,10 @@ services:
       context: './nifi'
       dockerfile: Dockerfile
     volumes:
-      - "./nifi/templates/:/opt/nifi/nifi-1.13.0/conf/templates/:ro"
-      - "./nifi/processors/:/processors/:ro"
+      - "./nifi/templates/:/opt/nifi/nifi-1.13.0/conf/templates/"
+      - "./nifi/processors/:/processors/"
     ports:
       - 1111:8080
       - 1112:1112
       - 1113:1113
+      - 1114:1114
