@@ -1,22 +1,28 @@
 <template>
   <div>
-
     <div class="label">
         {{label}}
     </div>
-    <div class="eye">
-      <div class="pupil" :style="style">
+    <div class="container">
+      <div class="bar" :style="style">
       </div>
+    </div>
+    <div class="timestamp">
+        {{timestamp}}
     </div>
   </div>
 </template>
 
 <script>
-const MAX_PUPIL_SIZE = 10 //mm
+const MAX_BAR_VALUE = 1
 export default {
-  name: 'Pupil',
+  name: 'Bar',
   props: {
-    diameter: {
+    value: {
+      default: null,
+      type: Number
+    },
+    timestamp: {
       default: null,
       type: Number
     },
@@ -27,8 +33,8 @@ export default {
   },
   computed: {
     style() { 
-      const { diameter } = this.$props
-      const size = diameter > 0 ? (diameter/MAX_PUPIL_SIZE)*100 : 0
+      const { value } = this.$props
+      const size = value > 0 ? (value/MAX_BAR_VALUE)*100 : 0
       return {
         height: `${size}%`,
         width: `${size}%`,
@@ -39,20 +45,22 @@ export default {
 </script>
 
 <style scoped>
-.eye {
-  height: 100px;
-  width: 100px;
+.container {
+  height: 30px;
+  width: 220px;
   border: 10px solid rgba(0, 0, 0, 0.7);
-  border-radius: 60px;
   display: flex;
   justify-content: center;
   align-items: center
 }
 
-.pupil {
-  height: 50px;
-  width: 50px;
+.bar {
+  height: 30px;
+  width: 0px;
   background-color: rgba(0, 0, 0, 0.7);
-  border-radius: 60px;
+}
+
+.timestamp {
+  width: 220px;
 }
 </style>
