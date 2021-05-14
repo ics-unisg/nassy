@@ -11,3 +11,5 @@ cursor.execute('DROP TABLE IF EXISTS et')
 db.commit()
 cursor.close()
 db.close()
+
+print(json.dumps({ "reset": True }))

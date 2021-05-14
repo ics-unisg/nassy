@@ -2,7 +2,7 @@
   <div>
 
     <div class="label">
-        {{label}}
+        {{label}} ({{Math.round(diameter*100)/100}})
     </div>
     <div class="eye">
       <div class="pupil" :style="style">

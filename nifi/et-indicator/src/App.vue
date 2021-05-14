@@ -8,6 +8,9 @@
     <div class="row">
       <Bar label="CL predicted by the model" :value="prediction.value" :timestamp="prediction.timestamp" class="mt-10"/>
     </div>
+    <div class="row">
+      <Bar label="LHIPA" :value="lhipa.value" :timestamp="lhipa.timestamp" :max-value="10" class="mt-10"/>
+    </div>
   </div>
 </template>
 
@@ -21,6 +24,10 @@ export default {
     Pupil, Bar
   },
   data() { return {
+    lhipa: {
+      value: null,
+      timestamp: null
+    },
     prediction: {
       value: null,
       timestamp: null
@@ -34,15 +41,31 @@ export default {
     this.$options.sockets.onmessage = (event) =>  {
       const data = JSON.parse(event.data)
 
+
       if (data.diameter) {
         this.diameter.left = data.diameter?.left
         this.diameter.right = data.diameter?.right
       }
 
       if (typeof data.prediction !== 'undefined') {
-        console.log(data)
         this.prediction.value = data.prediction
         this.prediction.timestamp = data.timestamp
+      }
+
+      if (typeof data.lhipa !== 'undefined') {
+        this.lhipa.value = data.lhipa
+        this.lhipa.timestamp = data.timestamp
+      }
+
+      if (data.reset) {
+        this.diameter.left = null
+        this.diameter.right = null
+
+        this.prediction.value = null
+        this.prediction.timestamp = null
+
+        this.lhipa.value = null
+        this.lhipa.timestamp = null
       }
 
     }
