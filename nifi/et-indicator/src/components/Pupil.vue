@@ -2,7 +2,7 @@
   <div>
 
     <div class="label">
-        {{label}}
+        {{label}} ({{Math.round(diameter*100)/100}})
     </div>
     <div class="eye">
       <div class="pupil" :style="style">
@@ -23,6 +23,10 @@ export default {
     label: {
       default: null,
       type: String
+    },
+    missing: {
+      default: false,
+      type: Boolean
     }
   },
   computed: {
@@ -32,6 +36,7 @@ export default {
       return {
         height: `${size}%`,
         width: `${size}%`,
+        opacity: this.$props.missing ? 0.5 : 1,
       }
     }
   }

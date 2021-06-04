@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="label">
-        {{label}}
+        {{label}} ({{Math.round(value*100)/100}})
     </div>
     <div class="container">
       <div class="bar" :style="style">
@@ -14,12 +14,15 @@
 </template>
 
 <script>
-const MAX_BAR_VALUE = 1
 export default {
   name: 'Bar',
   props: {
     value: {
       default: null,
+      type: Number
+    },
+    maxValue: {
+      default: 1,
       type: Number
     },
     timestamp: {
@@ -33,10 +36,10 @@ export default {
   },
   computed: {
     style() { 
-      const { value } = this.$props
-      const size = value > 0 ? (value/MAX_BAR_VALUE)*100 : 0
+      const { value, maxValue } = this.$props
+      const size = value > 0 ? (value/maxValue)*100 : 0
       return {
-        height: `${size}%`,
+        height: `100%`,
         width: `${size}%`,
       }
     }

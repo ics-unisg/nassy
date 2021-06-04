@@ -27,6 +27,8 @@ df['timestamp'] = df.apply(lambda x: int(x['timestamp'] / 10), axis=1)
 df = df.set_index(pd.TimedeltaIndex(df['timestamp'].values))
 df['ET_PubilAvg'] = df.apply(lambda x: (x['diameter_left'] + x['diameter_right']) / 2, axis=1)
 
+study = df.iloc[0].study
+subject = df.iloc[0].subject
 
 baseline = copy(df[df['type'] == 'BASELINE'])
 baseline = baseline.set_index(pd.TimedeltaIndex(baseline['timestamp'].values))
@@ -49,6 +51,6 @@ d_std = b_std - e_std
 
 
 
-print(f'd_mean,d_median,d_std,e_min,e_max,e_mean,e_median,e_std,e_peak_count,e_peak_count_pm,b_min,b_max,b_mean,b_median,b_std,b_peak_count,b_peak_count_pm,b_start,b_duration,e_start,e_duration,e_distance')
-print(f'{d_mean},{d_median},{d_std},{e_min},{e_max},{e_mean},{e_median},{e_std},{e_peak_count},{e_peak_count_pm},{b_min},{b_max},{b_mean},{b_median},{b_std},{b_peak_count},{b_peak_count_pm},{b_start},{b_duration},{e_start},{e_duration},{e_distance}')
+print(f'd_mean,d_median,d_std,e_min,e_max,e_mean,e_median,e_std,e_peak_count,e_peak_count_pm,b_min,b_max,b_mean,b_median,b_std,b_peak_count,b_peak_count_pm,b_start,b_duration,e_start,e_duration,e_distance,study,subject')
+print(f'{d_mean},{d_median},{d_std},{e_min},{e_max},{e_mean},{e_median},{e_std},{e_peak_count},{e_peak_count_pm},{b_min},{b_max},{b_mean},{b_median},{b_std},{b_peak_count},{b_peak_count_pm},{b_start},{b_duration},{e_start},{e_duration},{e_distance},{study},{subject}')
 
