@@ -56,10 +56,11 @@ df = pd.read_csv(sys.stdin)
 df = df.set_index(pd.DatetimeIndex(df['timestamp'].values*100000))
 df['diameter'] = (df['diameter_left'] + df['diameter_right']) / 2
 
-
+study = df.iloc[0].study
+subject = df.iloc[0].subject
 index = lhipa(df['diameter'].to_numpy())
 
 
-print(f'lhipa,timestamp')
-print(f'{index if index is not None else 0.0},{df.iloc[0]["timestamp"]}')
+print(f'lhipa,timestamp,study,subject')
+print(f'{index if index is not None else 0.0},{df.iloc[0]["timestamp"]},{study},{subject}')
 

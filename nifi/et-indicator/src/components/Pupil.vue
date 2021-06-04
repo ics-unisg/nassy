@@ -23,6 +23,10 @@ export default {
     label: {
       default: null,
       type: String
+    },
+    missing: {
+      default: false,
+      type: Boolean
     }
   },
   computed: {
@@ -32,6 +36,7 @@ export default {
       return {
         height: `${size}%`,
         width: `${size}%`,
+        opacity: this.$props.missing ? 0.5 : 1,
       }
     }
   }

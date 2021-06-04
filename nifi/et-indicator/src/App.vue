@@ -1,15 +1,18 @@
 <template>
   <div id="app">
     <div class="row">
-      <Pupil label="left pupil" :diameter="diameter.left"/>
-      <Pupil label="right pupil" :diameter="diameter.right"/>
+      {{meta.study}} - {{meta.subject}} | {{type}}
+    </div>
+    <div class="row mt-10">
+      <Pupil label="left pupil" :diameter="diameter.left" :missing="diameter.missing.right"/>
+      <Pupil label="right pupil" :diameter="diameter.right" :missing="diameter.missing.right"/>
     </div>
 
     <div class="row">
       <Bar label="CL predicted by the model" :value="prediction.value" :timestamp="prediction.timestamp" class="mt-10"/>
     </div>
     <div class="row">
-      <Bar label="LHIPA" :value="lhipa.value" :timestamp="lhipa.timestamp" :max-value="10" class="mt-10"/>
+      <Bar label="LHIPA" :value="lhipa.value" :timestamp="lhipa.timestamp" :max-value="100" class="mt-10"/>
     </div>
   </div>
 </template>
@@ -24,6 +27,10 @@ export default {
     Pupil, Bar
   },
   data() { return {
+    meta: {
+      study: null,
+      subject: null
+    },
     lhipa: {
       value: null,
       timestamp: null
@@ -32,22 +39,35 @@ export default {
       value: null,
       timestamp: null
     },
+    type: "RESET",
     diameter: {
       left: null,
       right: null,
+      missing: {
+        left: true,
+        right: true
+      }
     }
   }},
   mounted() {
     this.$options.sockets.onmessage = (event) =>  {
       const data = JSON.parse(event.data)
+      if(data.type) this.type = data.type
 
+
+      if (data.study) this.meta.study = data.study
+      if (data.subject) this.meta.subject = data.subject
 
       if (data.diameter) {
-        this.diameter.left = data.diameter?.left
-        this.diameter.right = data.diameter?.right
+        if (data.diameter?.left > 0) this.diameter.left = data.diameter?.left
+        if (data.diameter?.right > 0) this.diameter.right = data.diameter?.right
+
+        this.diameter.missing.left = data.diameter?.left <= 0
+        this.diameter.missing.right = data.diameter?.right <= 0
       }
 
       if (typeof data.prediction !== 'undefined') {
+        console.log(data)
         this.prediction.value = data.prediction
         this.prediction.timestamp = data.timestamp
       }
@@ -58,6 +78,7 @@ export default {
       }
 
       if (data.reset) {
+        this.type = "RESET"
         this.diameter.left = null
         this.diameter.right = null
 
@@ -66,6 +87,9 @@ export default {
 
         this.lhipa.value = null
         this.lhipa.timestamp = null
+
+        this.meta.subject = null
+        this.meta.study = null
       }
 
     }

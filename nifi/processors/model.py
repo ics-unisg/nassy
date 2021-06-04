@@ -41,6 +41,8 @@ with torch.no_grad():
 
     b_start = int(df.iloc[0].b_start)
     e_start = int(df.iloc[0].e_start)
+    study = df.iloc[0].study
+    subject = df.iloc[0].subject
 
-    print(f'prediction_class,b_start,e_start')
-    print(f'{predicted_class},{b_start},{e_start}')
+    print(f'prediction_class,b_start,e_start,study,subject')
+    print(f'{predicted_class},{b_start},{e_start},{study},{subject}')

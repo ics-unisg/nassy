@@ -2,14 +2,18 @@
 
 import json
 import sys
-
+import os
 import sqlite3
 
-db = sqlite3.connect('/ingres.db')
-cursor = db.cursor()
-cursor.execute('DROP TABLE IF EXISTS et')
-db.commit()
-cursor.close()
-db.close()
+for f in os.listdir('/data'):
+    if len(f.split('-')) == 1:
+        db = sqlite3.connect(f'/data/{f}')
+        cursor = db.cursor()
+        cursor.execute('DROP TABLE IF EXISTS et')
+        db.commit()
+        cursor.close()
+        db.close()
 
-print(json.dumps({ "reset": True }))
+        os.remove(f'/data/{f}')
+
+        print(json.dumps({ "reset": True }))
