@@ -2,7 +2,6 @@
 .directory
 /build/
 /out/
-!gradle/wrapper/gradle-wrapper.jar
 
 ### IntelliJ IDEA ###
 .idea
@@ -26,3 +25,7 @@ TestForCheetah/logs/
 
 **/*.ipynb_checkpoints
 **/*.vscode/
+
+
+!dcap/gradle/wrapper/gradle-wrapper.jar
+!dcap/gradle/wrapper/gradle-wrapper.properties
