@@ -31,7 +31,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
                     url=settings.get('url') + "/data", 
                     data=json.dumps({
                         'timestamp': int(datetime.now().timestamp()),
-                        'type': 'BASELINE',
+                        'type': STATE,
                         'subject': SUBJECT,
                         'study': STUDY,
                         'diameter': {
@@ -44,9 +44,9 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
         elif source == 'Affectiva AFFDEX/Affectiva AFFDEX':
             pass
         elif source == 'AttentionTool':
-            print(params)
             if params[0] == 'SlideStart':
                 start = params[4].split('-')[0]
+                print(start)
                 if start == 'baseline':
                     STATE = 'BASELINE'
                 elif start == 'experiment':

@@ -1,4 +1,4 @@
-FROM gradle:3.5-jdk9 AS TEMP_BUILD_IMAGE
+FROM gradle:3.5-jdk9
 ENV APP_HOME=/usr/app/
 WORKDIR $APP_HOME
 COPY build.gradle $APP_HOME

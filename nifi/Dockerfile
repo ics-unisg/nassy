@@ -19,3 +19,5 @@ RUN pip3 install numpy
 RUN pip3 install requests
 RUN pip3 install torch
 RUN pip3 install PyWavelets
+
+RUN mkdir /data

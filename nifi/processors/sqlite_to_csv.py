@@ -33,13 +33,12 @@ for f in os.listdir('/data'):
                 baseline = [entry for entry in cursor.fetchall()]
 
                 if len(experiment) > 0 and len(baseline) > 0:
+                    if first:
+                        first = False
+                    else:
+                        print("---split---")
                     print('timestamp,type,diameter_left,diameter_right,study,subject')
                     for (timestamp, left, right, record_type, study, subject) in baseline + experiment:
                         print(f'{timestamp},{record_type},{left},{right},{study},{subject}')
-                
-                if first:
-                    first = False
-                else:
-                    print("---split---")
 
                 db.close()

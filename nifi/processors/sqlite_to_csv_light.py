@@ -19,15 +19,14 @@ for f in os.listdir('/data'):
             cursor.execute("SELECT timestamp, left, right, study, subject from et where timestamp >= ? AND timestamp <= ? ORDER BY timestamp asc", (lower_bound, timestamp))
             data = [entry for entry in cursor.fetchall()]
 
-
             if len(data) > 2:
-                print('timestamp,diameter_left,diameter_right,study,subject')
-                for (timestamp, left, right, study, subject) in data:
-                    print(f'{timestamp},{left},{right},{study},{subject}')
-
                 if first:
                     first = False
                 else:
                     print("---split---")
+                print('timestamp,diameter_left,diameter_right,study,subject')
+                for (timestamp, left, right, study, subject) in data:
+                    print(f'{timestamp},{left},{right},{study},{subject}')
+
                 
             db.close()
