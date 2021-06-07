@@ -35,7 +35,7 @@ with torch.no_grad():
     model2 = NN(17,2)
     model2.load_state_dict(torch.load('/processors/torch', map_location=device))
     model2.eval()
-    data_to_predict = df.drop(['b_start', 'b_duration', 'e_start', 'e_duration', 'e_distance'], axis=1).to_numpy()[0]
+    data_to_predict = df.drop(['b_start', 'b_duration', 'e_start', 'e_duration', 'e_distance','study','subject'], axis=1).to_numpy()[0]
     prediction = model2(torch.from_numpy(data_to_predict).float())
     predicted_class = np.argmax(prediction)
 

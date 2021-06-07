@@ -3,6 +3,7 @@
 import sqlite3
 import os 
 
+first = True
 for f in os.listdir('/data'):
     if len(f.split('-')) == 1:
         db = sqlite3.connect(f'/data/{f}')
@@ -24,7 +25,9 @@ for f in os.listdir('/data'):
                 for (timestamp, left, right, study, subject) in data:
                     print(f'{timestamp},{left},{right},{study},{subject}')
 
-                
-                print("---split---")
+                if first:
+                    first = False
+                else:
+                    print("---split---")
                 
             db.close()

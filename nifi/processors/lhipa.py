@@ -53,7 +53,8 @@ def lhipa(d):
     return float(ctr)/tt
 
 df = pd.read_csv(sys.stdin)
-df = df.set_index(pd.DatetimeIndex(df['timestamp'].values*100000))
+df['timestamp'] = df.apply(lambda x: int(x['timestamp'] / 10), axis=1)
+df = df.set_index(pd.TimedeltaIndex(df['timestamp'].values))
 df['diameter'] = (df['diameter_left'] + df['diameter_right']) / 2
 
 study = df.iloc[0].study
