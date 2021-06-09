@@ -1,0 +1,5 @@
+<Sample Id="TrackFieldPosition" Name="iTraceSample">
+ <Field Id="Path" />
+ <Field Id="Line" />
+ <Field Id="Col" />
+</Sample>
