@@ -1,5 +1,5 @@
-<EventSource Version="1" Id="iTrace" Name="iTrace">
-    <Sample Id="TrackFieldPosition" Name="iTraceSample">
+<EventSource Version="1" Id="iTrace" Name="iTraceUnisg">
+    <Sample Id="TrackFilePosition" Name="iTraceSample">
         <Field Id="Path" />
         <Field Id="Line" />
         <Field Id="Col" />
