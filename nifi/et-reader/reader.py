@@ -21,7 +21,8 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
     while True:
         line, addr = s.recvfrom(1024)
         [index, source, *params] = line.decode('utf-8').replace('\n\r', '').split(';')
-        
+        #print(".", end="")
+        print(source)
         if source == 'EyeTracker':
             if SUBJECT and STATE:
                 [_, timestamp, media_time, et_timestamp, glx, gly, grx, gry, lpd, rpd, led, red, lepx, lepy, repx, repy] = params
