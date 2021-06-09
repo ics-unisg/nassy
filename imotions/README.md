@@ -14,3 +14,8 @@ Preferences > Global Settings > API
 
 Add the definition in eventsource-itrace.xml and enable reception over tcp port 8089. This port is hardcode in the itrace eclipse plugin.
 
+# Itrace
+
+Install itrace and configure the plugin. Use the adapted version: https://github.com/ics-unisg/iTrace-Eclipse/pull/1
+
+A current build can be found in this folder. Copy `org.itrace_0.1.2.jar` to the `eclipse\dropin` folder inside the eclipse installation.
