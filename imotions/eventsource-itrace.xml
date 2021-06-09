@@ -1,5 +1,7 @@
-<Sample Id="TrackFieldPosition" Name="iTraceSample">
- <Field Id="Path" />
- <Field Id="Line" />
- <Field Id="Col" />
-</Sample>
+<EventSource Version=”1” Id=iTrace Name=”iTrace”>
+    <Sample Id="TrackFieldPosition" Name="iTraceSample">
+        <Field Id="Path" />
+        <Field Id="Line" />
+        <Field Id="Col" />
+    </Sample>
+</EventSource>
