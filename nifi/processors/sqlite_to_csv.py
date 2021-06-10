@@ -1,5 +1,23 @@
 #!/usr/bin/python3
 
+"""Reads the sqlite data for cl model
+
+For every user it will read the past two minute of 
+eye tracker data form sqlite and pass it forward to the cl model.
+It will also read the baseline data.
+
+Data has to be send the following way:
+Baseline - Experiment
+
+To the model all baseline data will be sent and the last 2 min of experiment data but only if there is any experiment data.
+"""
+
+__author__ = "Martin Eigenmann"
+__license__ = "unlicence"
+__version__ = "0.0.1"
+__email__ = "martin.eigenmann@unisg.ch"
+__status__ = "Prototpye"
+
 import sqlite3
 import os
 
@@ -17,8 +35,7 @@ for f in os.listdir('/data'):
             result = cursor.fetchone()
             if result:
                 experiment_upper_bound = result[0]
-                experiment_lower_bound = experiment_upper_bound - 2 * 60 * 1000
-                # TODO: comment how to change window size
+                experiment_lower_bound = experiment_upper_bound - 2 * 60 * 1000 # The past 120000 milliseconds
 
                 cursor.execute("SELECT timestamp from et where type = 'BASELINE' ORDER BY timestamp DESC LIMIT 1")
                 baseline_upper_bound = cursor.fetchone()[0]

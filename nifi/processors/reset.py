@@ -1,5 +1,16 @@
 #!/usr/bin/python3
 
+"""Resets the datastore
+
+Deletes all sqlite files. This will not reset nifi but reset lhipa and cl model states
+"""
+
+__author__ = "Martin Eigenmann"
+__license__ = "unlicence"
+__version__ = "0.0.1"
+__email__ = "martin.eigenmann@unisg.ch"
+__status__ = "Prototpye"
+
 import json
 import sys
 import os

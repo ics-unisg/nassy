@@ -1,5 +1,17 @@
 #!/usr/bin/python3
 
+"""Reads the sqlite data for lhipa
+
+For every user it will read the past minute of 
+eye tracker data form sqlite and pass it forward to lhipa
+"""
+
+__author__ = "Martin Eigenmann"
+__license__ = "unlicence"
+__version__ = "0.0.1"
+__email__ = "martin.eigenmann@unisg.ch"
+__status__ = "Prototpye"
+
 import sqlite3
 import os 
 
@@ -14,7 +26,7 @@ for f in os.listdir('/data'):
             cursor.execute("SELECT timestamp from et ORDER BY timestamp DESC LIMIT 1")
 
             timestamp = cursor.fetchone()[0]
-            lower_bound = timestamp - 1 * 60 * 1000
+            lower_bound = timestamp - 1 * 60 * 1000 # The past 60000 milliseconds
 
             cursor.execute("SELECT timestamp, left, right, study, subject from et where timestamp >= ? AND timestamp <= ? ORDER BY timestamp asc", (lower_bound, timestamp))
             data = [entry for entry in cursor.fetchall()]

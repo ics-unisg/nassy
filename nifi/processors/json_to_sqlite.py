@@ -1,5 +1,17 @@
 #!/usr/bin/python3
 
+"""Stores data in sqlite per user.
+
+Reads stdin json data and stores that in a local sqlite.
+This sqlite file is different per study-subject combination
+"""
+
+__author__ = "Martin Eigenmann"
+__license__ = "unlicence"
+__version__ = "0.0.1"
+__email__ = "martin.eigenmann@unisg.ch"
+__status__ = "Prototpye"
+
 import json
 import sys
 import hashlib

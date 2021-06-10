@@ -1,5 +1,17 @@
 #!/usr/bin/python3
- 
+
+"""Extreact feates for the model.
+
+Reads stdin and extracts features that Fritz proposed
+"""
+
+__author__ = "Martin Eigenmann"
+__license__ = "unlicence"
+__version__ = "0.0.1"
+__email__ = "martin.eigenmann@unisg.ch"
+__status__ = "Prototpye"
+
+
 import pandas as pd
 import sys
 from copy import copy
