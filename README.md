@@ -79,11 +79,3 @@ pipenv run python3 reader.py
 # Ideas
 
 Matlab in nifi can be done with matlab in the nifi docker container https://github.com/mathworks-ref-arch/matlab-dockerfile
-
-
-
-
-# TODO
-- Comment Header in each file (Why it is needed and what it does / design & architecture)
-- Tag working state
-- fix lhipa
