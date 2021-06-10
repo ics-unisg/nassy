@@ -17,6 +17,9 @@ sudo curl -L "https://github.com/docker/compose/releases/download/1.29.2/docker-
 sudo chmod +x /usr/local/bin/docker-compose
 ```
 
+## Installation on Mac
+Make sure to increase the resource limit of docker to at least 4GB Ram.
+
 ## Run the infrastructure
 
 ```
@@ -39,12 +42,6 @@ npm run dev
 
 Navigate to (http://localhost:8080)[http://localhost:8080]
 
-## Start ET-reader
-```
-cd nifi/et-reader/
-pipenv install
-pipenv run python3 reader.py
-```
 
 Navigate to (http://localhost:8080)[http://localhost:8080]
 
@@ -52,12 +49,15 @@ Navigate to (http://localhost:8080)[http://localhost:8080]
 ## Configure IMotions
 API
 
-# iTrace
+# iTrace / iMotions
+Make sure to follow the steps here: https://github.com/ics-unisg/dcap/tree/main/imotions
 
-## Catches
-- dcap keeps some data in the mysql database in in local filesystem. As it is now, it is not production ready
-
-
+Start the reader:
+```
+cd nifi/et-reader/
+pipenv install
+pipenv run python3 reader.py
+```
 
 
 # Ideas
