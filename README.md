@@ -43,16 +43,23 @@ npm run dev
 Navigate to (http://localhost:8080)[http://localhost:8080]
 
 
-Navigate to (http://localhost:8080)[http://localhost:8080]
-
-
-## Configure IMotions
-API
-
 # iTrace / iMotions
 Make sure to follow the steps here: https://github.com/ics-unisg/dcap/tree/main/imotions
 
-Start the reader:
+# Usage
+
+## Recorded data
+You can "replay" recorded data in realistic speed. ET-Simulator can do that.
+```
+cd nifi/et-simulator
+pipenv install
+pipenv run python read_file.py
+```
+This will play all data in sample.csv.
+
+
+## Live data
+Start the reader. Do not forget to point iMotions to your IP. You have to be in the same network.
 ```
 cd nifi/et-reader/
 pipenv install
