@@ -18,6 +18,7 @@ for f in os.listdir('/data'):
             if result:
                 experiment_upper_bound = result[0]
                 experiment_lower_bound = experiment_upper_bound - 2 * 60 * 1000
+                # TODO: comment how to change window size
 
                 cursor.execute("SELECT timestamp from et where type = 'BASELINE' ORDER BY timestamp DESC LIMIT 1")
                 baseline_upper_bound = cursor.fetchone()[0]
