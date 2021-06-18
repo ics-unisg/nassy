@@ -6,7 +6,7 @@ The project in IMOTIONS should have two types of stimuli (baseline and experimen
 
 "experiment"-digit
 
-Example of experiemnt's stimuli: baseline-1, experiment-1, baseline-2, experiment-2 ...
+Example of an experiment stimuli: baseline-1, experiment-1, baseline-2, experiment-2 ...
  
 
 # Event Forwarding
