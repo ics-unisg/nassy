@@ -1,3 +1,11 @@
+# Project Configuration in IMOTIONS
+
+The project in IMOTIONS should have two types of stimuli (baseline and experiment). The names of these stimuli should use the following pattern:
+
+baseline-<digit>
+experiment-<digit>
+ 
+
 # Event Forwarding
 
 Preferences > Global Settings > API
