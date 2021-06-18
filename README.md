@@ -34,14 +34,38 @@ Navigate to (http://localhost:1111/nifi)[http://localhost:1111/nifi] and add the
 
 ![image](https://user-images.githubusercontent.com/2293142/121515080-0bf57580-c9ed-11eb-8fe3-98d1244a79cf.png)
 
-Be sure to update the `websocket.controller.service.id` with the corresponding jetty websocket server in UpdateAttribute stage.
 
-
+Press anywhere outside the NIFI stages
 
 ![image](https://user-images.githubusercontent.com/2293142/121515379-6b538580-c9ed-11eb-9a45-39d7a2ea2c88.png)
-![image](https://user-images.githubusercontent.com/2293142/121515455-7dcdbf00-c9ed-11eb-91cc-7d206481ad06.png)
-![image](https://user-images.githubusercontent.com/2293142/121515154-24fe2680-c9ed-11eb-8e0f-5b4fe87a3e4c.png)
 
+Press the Configuration icon
+
+Go to Controller Services Panel 
+
+<img width="1238" alt="Pasted Graphic 1" src="https://user-images.githubusercontent.com/23260661/122577787-780e5400-d053-11eb-8226-8e1b408d3350.png">
+
+Press the Configration icon of JettyWebSocketServer
+
+Copy the Id
+
+<img width="767" alt="Controller Service Details" src="https://user-images.githubusercontent.com/23260661/122578544-40ec7280-d054-11eb-9fd9-81ca6caee13b.png">
+
+Go to UpdateAttribute phase
+
+<img width="285" alt="image" src="https://user-images.githubusercontent.com/23260661/122577949-b0159700-d053-11eb-95ba-9c5fd5cdb6a7.png">
+
+Press the Configuration icon
+
+Go to the Properties Panel
+
+<img width="765" alt="Configure Processor" src="https://user-images.githubusercontent.com/23260661/122578176-eb17ca80-d053-11eb-8b9e-b72e903f671a.png">
+
+Paste the id in the field websocker.controller.service.id 
+
+Close the Panel 
+
+Run NIFI
 
 
 ## Start ET-Indicator
