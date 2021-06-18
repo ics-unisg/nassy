@@ -3,6 +3,7 @@
 The project in IMOTIONS should have two types of stimuli (baseline and experiment). The names of these stimuli should use the following pattern:
 
 "baseline"-digit
+
 "experiment"-digit
 
 Example of experiemnt's stimuli: baseline-1, experiment-1, baseline-2, experiment-2 ...
