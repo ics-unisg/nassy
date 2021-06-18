@@ -48,7 +48,7 @@ Be sure to update the `websocket.controller.service.id` with the corresponding j
 ```
 cd nifi/et-indicator/
 npm install
-npm run dev
+npm run serve
 ```
 
 Navigate to (http://localhost:8080)[http://localhost:8080]
