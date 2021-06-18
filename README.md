@@ -34,7 +34,9 @@ Navigate to (http://localhost:1111/nifi)[http://localhost:1111/nifi] and add the
 
 ![image](https://user-images.githubusercontent.com/2293142/121515080-0bf57580-c9ed-11eb-8fe3-98d1244a79cf.png)
 
-Be sure to update the `websocket.controller.service.id` with the corresponding jetty websocket server.
+Be sure to update the `websocket.controller.service.id` with the corresponding jetty websocket server in UpdateAttribute stage.
+
+
 
 ![image](https://user-images.githubusercontent.com/2293142/121515379-6b538580-c9ed-11eb-9a45-39d7a2ea2c88.png)
 ![image](https://user-images.githubusercontent.com/2293142/121515455-7dcdbf00-c9ed-11eb-91cc-7d206481ad06.png)
