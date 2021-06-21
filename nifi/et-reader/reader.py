@@ -14,12 +14,13 @@ STUDY = None
 STATE = None
 
 
-HOST = '0.0.0.0'  # Standard loopback interface address (localhost)
+HOST = '130.82.27.9'  # Standard loopback interface address (localhost)
 PORT = 9999        # Port to listen on (non-privileged ports are > 1023)
-with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
-    s.bind((HOST, PORT))
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+    s.connect((HOST, PORT))
+    print("connected")
     while True:
-        line, addr = s.recvfrom(1024)
+        line = s.recv(10240)
         [index, source, *params] = line.decode('utf-8').replace('\n\r', '').split(';')
         #print(".", end="")
         print(source)
@@ -27,6 +28,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
             if SUBJECT and STATE:
                 [_, timestamp, media_time, et_timestamp, glx, gly, grx, gry, lpd, rpd, led, red, lepx, lepy, repx, repy] = params
                 #print(index, source,  timestamp, media_time, glx, gly, grx, gry, lpd, rpd, led, red, lepx, lepy, repx, repy)
+
 
                 requests.post(
                     url=settings.get('url') + "/data", 
@@ -45,6 +47,7 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
         elif source == 'Affectiva AFFDEX/Affectiva AFFDEX':
             pass
         elif source == 'AttentionTool':
+            print(params)
             if params[0] == 'SlideStart':
                 start = params[4].split('-')[0]
                 print(start)
@@ -70,4 +73,5 @@ with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
                 pass
 
         else:
-            print(source, params)
+            pass
+            #print(source, params)
