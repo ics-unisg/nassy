@@ -4,8 +4,12 @@ import socket
 import sys
 import json
 
+from requests_futures.sessions import FuturesSession
+
+session = FuturesSession()
+
 settings = {
-    "url": 'http://localhost:1112'
+    "url": 'http://localhost:1112' # nifi server address
 }
 
 
@@ -26,11 +30,11 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         print(source)
         if source == 'EyeTracker':
             if SUBJECT and STATE:
-                [_, timestamp, media_time, et_timestamp, glx, gly, grx, gry, lpd, rpd, led, red, lepx, lepy, repx, repy] = params
+                [_, timestamp, media_time, et_timestamp, glx, gly, grx, gry, lpd, rpd, led, red, lepx, lepy, repx, repy, *rest] = params
                 #print(index, source,  timestamp, media_time, glx, gly, grx, gry, lpd, rpd, led, red, lepx, lepy, repx, repy)
 
 
-                requests.post(
+                session.post(
                     url=settings.get('url') + "/data", 
                     data=json.dumps({
                         'timestamp': int(datetime.now().timestamp()),
