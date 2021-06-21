@@ -14,9 +14,9 @@ STUDY = None
 STATE = None
 
 
-HOST = '0.0.0.0'  # Standard loopback interface address (localhost)
-PORT = 9999        # Port to listen on (non-privileged ports are > 1023)
-with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+HOST = '0.0.0.0'   # iMotions PC IP
+PORT = 9999        # Port to connect on
+with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.bind((HOST, PORT))
     while True:
         line, addr = s.recvfrom(1024)
