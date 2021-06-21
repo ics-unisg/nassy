@@ -39,7 +39,7 @@ Press anywhere outside the NIFI stages
 
 ![image](https://user-images.githubusercontent.com/2293142/121515379-6b538580-c9ed-11eb-9a45-39d7a2ea2c88.png)
 
-Press the Configuration icon
+Press the Configuration icon of NIFI Flow
 
 Go to Controller Services Panel 
 
@@ -64,6 +64,15 @@ Go to the Properties Panel
 Paste the id in the field websocker.controller.service.id 
 
 Close the Panel 
+
+Press anywhere outside the NIFI stages
+
+Press the Configuration icon of NIFI Flow
+
+Go to Controller Services Panel 
+
+Enable all services by pressing the enable icons of the different services
+
 
 Run NIFI
 
