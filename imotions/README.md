@@ -17,6 +17,17 @@ Preferences > Global Settings > API
 
 Set the Hostname to the ip where you want to have all events sent to.
 
+-----
+
+For reduced latency, you can use TCP and connect the IMOTIONS machine with the machine where NIFI is hosted using an ethernet cable.
+
+In this case, choose "Use TCP" in IMOTIONS and empty the Hostname field.
+
+Remember that both machines should have the same IP prefix (e.g., 192.168.1.x).
+
+Set the IP address of the IMOTIONS machine in et-reader/reader.py
+
+
 # Event Recieving
 
 Preferences > Global Settings > API
