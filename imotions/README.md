@@ -19,7 +19,7 @@ Set the Hostname to the ip where you want to have all events sent to.
 
 -----
 
-For reduced latency, you can use TCP and connect the IMOTIONS machine with the machine where NIFI is hosted using an ethernet cable.
+For reduced latency, you can use TCP and connect the IMOTIONS machine with the machine where NASSY is hosted using an ethernet cable.
 
 In this case, choose "Use TCP" in IMOTIONS and empty the Hostname field.
 
