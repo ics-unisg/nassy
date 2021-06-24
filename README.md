@@ -110,6 +110,13 @@ pipenv install
 pipenv run python3 reader.py
 ```
 
+## Reset database
+
+```
+cd nifi/et-simulator
+pipenv install
+pipenv run python reset.py
+```
 
 # Ideas
 
