@@ -23,8 +23,8 @@ def main():
     CHUNK_SIZE = 10240
 
 
-    HOST = '192.168.1.2'  # Standard loopback interface address (localhost)
-    PORT = 9999        # Port to listen on (non-privileged ports are > 1023)
+    HOST = '192.168.1.2'  # IP of iMotions pc
+    PORT = 9999        # Port of iMotions pc
     buffer = bytearray()
 
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
